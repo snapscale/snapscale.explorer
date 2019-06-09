@@ -20,7 +20,7 @@ LABEL org.label-schema.version=$BUILD_VERSION
 ENV BUILD_VERSION=$BUILD_VERSION
 ENV BUILD_DATE=$BUILD_DATE
 
-COPY --from=0 /explorer/build /usr/share/nginx/html
+COPY --from=0 /explorer/dist /usr/share/nginx/html
 
 EXPOSE 80
 
