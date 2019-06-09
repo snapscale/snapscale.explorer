@@ -2,7 +2,7 @@ steps:
 
   - id: docker build
     name: gcr.io/cloud-builders/docker
-    args: ['build', '-t', 'asia.gcr.io/$PROJECT_ID/ss-explorer:$COMMIT_SHA', '-t', 'asia.gcr.io/$PROJECT_ID/dashboard-bss-oss:latest', '-f', 'Dockerfile', '.']
+    args: ['build', '-t', 'asia.gcr.io/$PROJECT_ID/ss-explorer:$COMMIT_SHA', '-t', 'asia.gcr.io/$PROJECT_ID/ss-explorer:latest', '-f', 'Dockerfile', '.']
 
   - id: docker push 
     name: 'gcr.io/cloud-builders/docker'
