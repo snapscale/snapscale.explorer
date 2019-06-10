@@ -13,7 +13,7 @@ LABEL Author="Michael Huang(michael.huang@xeniro.io)"
 ARG BUILD_VERSION=1.0.0
 ARG BUILD_DATE
 
-LABEL org.label-schema.docker.cmd="docker run -p 80:80 -d asia.gcr.io/snapscale/explorer:latest"
+LABEL org.label-schema.docker.cmd="docker run -p 80:80 -d asia.gcr.io/snapscale/ss-explorer:latest"
 LABEL org.label-schema.build-date=$BUILD_DATE
 LABEL org.label-schema.version=$BUILD_VERSION
 
