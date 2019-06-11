@@ -1,180 +1,184 @@
 {
-  "name": "guangzhou",
-  "url": "http://www.guangzhou-bp.io",
-  "longitude": "113.264381",
-  "latitude": "23.129110",
-  "location": "guangzhou",
-  "country": "china",
-  "reward": "500"
-},
-{
-  "name": "wuhan",
-  "url": "http://www.wuhan-bp.io",
-  "longitude": "114.305542",
-  "latitude": "30.592850",
-  "location": "wuhan",
-  "country": "china",
-  "reward": "590"
-},
-{
-  "name": "hangzhou",
-  "url": "http://www.hangzhou-bp.io",
-  "longitude": "120.155067",
-  "latitude": "30.274084",
-  "location": "hangzhou",
-  "country": "china",
-  "reward": "520"
-},
-{
-  "name": "xian",
-  "url": "http://www.xian-bp.io",
-  "longitude": "108.939774",
-  "latitude": "34.341576",
-  "location": "xian",
-  "country": "china",
-  "reward": "520"
-},
-{
-  "name": "shenyang",
-  "url": "http://www.shenyang-bp.io",
-  "longitude": "123.431473",
-  "latitude": "41.805698",
-  "location": "shenyang",
-  "country": "china",
-  "reward": "420"
-},
-{
-  "name": "mumbai",
-  "url": "http://www.mumbai-bp.io",
-  "longitude": "72.877655",
-  "latitude": "19.075983",
-  "location": "mumbai",
-  "country": "india",
-  "reward": "380"
-},
-{
-  "name": "manila",
-  "url": "http://www.tokyo-bp.io",
-  "longitude": "120.984222",
-  "latitude": "14.599512",
-  "location": "manila",
-  "country": "philippines",
-  "reward": "520"
-},
-{
-  "name": "moscow",
-  "url": "http://www.moscow-bp.io",
-  "longitude": "37.617298",
-  "latitude": "55.755825",
-  "location": "moscow",
-  "country": "Russia",
-  "reward": "500"
-},
-{
-  "name": "tokyo",
-  "url": "http://www.tokyo-bp.io",
-  "longitude": "139.839478",
-  "latitude": "35.652832",
-  "location": "tokyo",
-  "country": "japan",
-  "reward": "520"
-},
-{
-  "name": "istanbul",
-  "url": "http://www.istanbul-bp.io",
-  "longitude": "28.978359",
-  "latitude": "41.008240",
-  "location": "istanbul",
-  "country": "turkey",
-  "reward": "565"
-},
-{
-  "name": "karachi",
-  "url": "http://www.karachi-bp.io",
-  "longitude": "67.001137",
-  "latitude": "24.860735",
-  "location": "Karachi",
-  "country": "Pakistan",
-  "reward": "520"
-},
-{
-  "name": "newyork",
-  "url": "http://www.newyork-bp.io",
-  "longitude": "-74.005974",
-  "latitude": "40.712776",
-  "location": "New York",
-  "country": "United States",
-  "reward": "540"
-},
-{
-  "name": "hongkong",
-  "url": "http://www.hongkong-bp.io",
-  "longitude": "114.109497",
-  "latitude": "22.396427",
-  "location": "Hong Kong",
-  "country": "China",
-  "reward": "521"
-},
-{
-  "name": "london",
-  "url": "http://www.london-bp.io",
-  "longitude": "-0.127758",
-  "latitude": "51.507351",
-  "location": "London",
-  "country": "United Kingdom",
-  "reward": "520"
-},
-{
-  "name": "singapore",
-  "url": "http://www.singapore-bp.io",
-  "longitude": "103.819839",
-  "latitude": "1.352083",
-  "location": "Singapore",
-  "country": "Singapore",
-  "reward": "550"
-},
-{
-  "name": "riodejaneiro",
-  "url": "http://www.rio-bp.io",
-  "longitude": "-43.196388",
-  "latitude": "-22.908333",
-  "location": "Rio",
-  "country": "Brazil",
-  "reward": "550"
-},
-{
-  "name": "paloalto",
-  "url": "http://www.paloalto-bp.io",
-  "longitude": "-122.143936",
-  "latitude": "37.468319",
-  "location": "Palo Alto",
-  "country": "United States",
-  "reward": "550"
-},
-{
-  "name": "ottawa",
-  "url": "http://www.ottawa-bp.io",
-  "longitude": "-75.697189",
-  "latitude": "45.421532",
-  "location": "Ottawa",
-  "country": "Canada",
-  "reward": "570"
-},
-{
-  "name": "seoul",
-  "url": "http://www.seoul-bp.io",
-  "longitude": "126.977966",
-  "latitude": "37.566536",
-  "location": "Seoul",
-  "country": "Korean",
-  "reward": "550"
-},
-{
-  "name": "alexandria",
-  "url": "http://www.alexandria-bp.io",
-  "longitude": "29.918739",
-  "latitude": "31.200092",
-  "location": "Alexandria",
-  "country": "Egypt",
-  "reward": "550"
+  "bp":[
+    {
+      "name": "guangzhou",
+      "url": "http://www.guangzhou-bp.io",
+      "longitude": "113.264381",
+      "latitude": "23.129110",
+      "location": "guangzhou",
+      "country": "china",
+      "reward": "500"
+    },
+    {
+      "name": "wuhan",
+      "url": "http://www.wuhan-bp.io",
+      "longitude": "114.305542",
+      "latitude": "30.592850",
+      "location": "wuhan",
+      "country": "china",
+      "reward": "590"
+    },
+    {
+      "name": "hangzhou",
+      "url": "http://www.hangzhou-bp.io",
+      "longitude": "120.155067",
+      "latitude": "30.274084",
+      "location": "hangzhou",
+      "country": "china",
+      "reward": "520"
+    },
+    {
+      "name": "xian",
+      "url": "http://www.xian-bp.io",
+      "longitude": "108.939774",
+      "latitude": "34.341576",
+      "location": "xian",
+      "country": "china",
+      "reward": "520"
+    },
+    {
+      "name": "shenyang",
+      "url": "http://www.shenyang-bp.io",
+      "longitude": "123.431473",
+      "latitude": "41.805698",
+      "location": "shenyang",
+      "country": "china",
+      "reward": "420"
+    },
+    {
+      "name": "mumbai",
+      "url": "http://www.mumbai-bp.io",
+      "longitude": "72.877655",
+      "latitude": "19.075983",
+      "location": "mumbai",
+      "country": "india",
+      "reward": "380"
+    },
+    {
+      "name": "manila",
+      "url": "http://www.tokyo-bp.io",
+      "longitude": "120.984222",
+      "latitude": "14.599512",
+      "location": "manila",
+      "country": "philippines",
+      "reward": "520"
+    },
+    {
+      "name": "moscow",
+      "url": "http://www.moscow-bp.io",
+      "longitude": "37.617298",
+      "latitude": "55.755825",
+      "location": "moscow",
+      "country": "Russia",
+      "reward": "500"
+    },
+    {
+      "name": "tokyo",
+      "url": "http://www.tokyo-bp.io",
+      "longitude": "139.839478",
+      "latitude": "35.652832",
+      "location": "tokyo",
+      "country": "japan",
+      "reward": "520"
+    },
+    {
+      "name": "istanbul",
+      "url": "http://www.istanbul-bp.io",
+      "longitude": "28.978359",
+      "latitude": "41.008240",
+      "location": "istanbul",
+      "country": "turkey",
+      "reward": "565"
+    },
+    {
+      "name": "karachi",
+      "url": "http://www.karachi-bp.io",
+      "longitude": "67.001137",
+      "latitude": "24.860735",
+      "location": "Karachi",
+      "country": "Pakistan",
+      "reward": "520"
+    },
+    {
+      "name": "newyork",
+      "url": "http://www.newyork-bp.io",
+      "longitude": "-74.005974",
+      "latitude": "40.712776",
+      "location": "New York",
+      "country": "United States",
+      "reward": "540"
+    },
+    {
+      "name": "hongkong",
+      "url": "http://www.hongkong-bp.io",
+      "longitude": "114.109497",
+      "latitude": "22.396427",
+      "location": "Hong Kong",
+      "country": "China",
+      "reward": "521"
+    },
+    {
+      "name": "london",
+      "url": "http://www.london-bp.io",
+      "longitude": "-0.127758",
+      "latitude": "51.507351",
+      "location": "London",
+      "country": "United Kingdom",
+      "reward": "520"
+    },
+    {
+      "name": "singapore",
+      "url": "http://www.singapore-bp.io",
+      "longitude": "103.819839",
+      "latitude": "1.352083",
+      "location": "Singapore",
+      "country": "Singapore",
+      "reward": "550"
+    },
+    {
+      "name": "riodejaneiro",
+      "url": "http://www.rio-bp.io",
+      "longitude": "-43.196388",
+      "latitude": "-22.908333",
+      "location": "Rio",
+      "country": "Brazil",
+      "reward": "550"
+    },
+    {
+      "name": "paloalto",
+      "url": "http://www.paloalto-bp.io",
+      "longitude": "-122.143936",
+      "latitude": "37.468319",
+      "location": "Palo Alto",
+      "country": "United States",
+      "reward": "550"
+    },
+    {
+      "name": "ottawa",
+      "url": "http://www.ottawa-bp.io",
+      "longitude": "-75.697189",
+      "latitude": "45.421532",
+      "location": "Ottawa",
+      "country": "Canada",
+      "reward": "570"
+    },
+    {
+      "name": "seoul",
+      "url": "http://www.seoul-bp.io",
+      "longitude": "126.977966",
+      "latitude": "37.566536",
+      "location": "Seoul",
+      "country": "Korean",
+      "reward": "550"
+    },
+    {
+      "name": "alexandria",
+      "url": "http://www.alexandria-bp.io",
+      "longitude": "29.918739",
+      "latitude": "31.200092",
+      "location": "Alexandria",
+      "country": "Egypt",
+      "reward": "550"
+    }
+  ]
 }
