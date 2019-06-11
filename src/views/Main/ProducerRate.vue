@@ -49,7 +49,9 @@ export default {
           width: 200,
           render(h, val, row) {
             return [
-              <img src={row.image} class="flag" />,
+              <div class="flag_wrapper">
+                <img src={row.image} class="flag" />
+              </div>,
               <span class="country">{row.location}</span>
             ];
           }
@@ -95,10 +97,21 @@ export default {
     .location {
       display: flex;
       align-items: center;
-      .flag {
+      .flag_wrapper {
         width: 24px;
         height: 24px;
         border-radius: 50%;
+        /*border: 1px solid #f8f8f8;*/
+        box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.5);
+        box-sizing: border-box;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .flag {
+          width: auto;
+          height: 24px;
+        }
       }
       .country {
         margin-left: 10px;

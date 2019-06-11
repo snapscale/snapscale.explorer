@@ -87,51 +87,53 @@ export default {
       currentAPS: null,
       currentTPS: null,
 
-      ungerKey: "EOS1111111111111111111111111111111114T1Anm"
+      ungerKey: "EOS1111111111111111111111111111111114T1Anm",
+
+      latestActions: null
     };
   },
   computed: {
-    latestActions() {
-      const data = this.latestBlocks;
-      if (!data) return null;
-      let transactions = [];
-      const trxObj = {};
-      data.forEach(elem => {
-        if (elem.transactions && elem.transactions.length > 0) {
-          elem.transactions.forEach(tr => {
-            if (!trxObj[elem.block_num]) {
-              trxObj[elem.block_num] = [];
-            }
-            if (tr.trx && tr.trx.transaction && tr.trx.transaction.actions) {
-              tr.trx.transaction.actions.forEach(act => {
-                act.block_num = tr.trx.id;
-              });
-              Array.prototype.push.apply(
-                trxObj[elem.block_num],
-                tr.trx.transaction.actions
-              );
-            }
-          });
-        }
-      });
-
-      Object.keys(trxObj).forEach(key => {
-        Array.prototype.push.apply(transactions, trxObj[key]);
-      });
-      transactions.reverse();
-
-      if (transactions.length >= this.offsetPageElems) {
-        let blocks = Object.keys(trxObj);
-        blocks.forEach((key, index) => {
-          if (index < blocks.length - this.offsetPageElems) {
-            delete trxObj[key];
-          }
-        });
-        return transactions.slice(0, this.offsetPageElems);
-      }
-
-      return transactions;
-    },
+    // latestActions() {
+    //   const data = this.latestBlocks;
+    //   if (!data) return null;
+    //   let transactions = [];
+    //   const trxObj = {};
+    //   data.forEach(elem => {
+    //     if (elem.transactions && elem.transactions.length > 0) {
+    //       elem.transactions.forEach(tr => {
+    //         if (!trxObj[elem.block_num]) {
+    //           trxObj[elem.block_num] = [];
+    //         }
+    //         if (tr.trx && tr.trx.transaction && tr.trx.transaction.actions) {
+    //           tr.trx.transaction.actions.forEach(act => {
+    //             act.block_num = tr.trx.id;
+    //           });
+    //           Array.prototype.push.apply(
+    //             trxObj[elem.block_num],
+    //             tr.trx.transaction.actions
+    //           );
+    //         }
+    //       });
+    //     }
+    //   });
+    //
+    //   Object.keys(trxObj).forEach(key => {
+    //     Array.prototype.push.apply(transactions, trxObj[key]);
+    //   });
+    //   transactions.reverse();
+    //
+    //   if (transactions.length >= this.offsetPageElems) {
+    //     let blocks = Object.keys(trxObj);
+    //     blocks.forEach((key, index) => {
+    //       if (index < blocks.length - this.offsetPageElems) {
+    //         delete trxObj[key];
+    //       }
+    //     });
+    //     return transactions.slice(0, this.offsetPageElems);
+    //   }
+    //
+    //   return transactions;
+    // },
 
     producer() {
       if (!this.tpsBlocks) return null;
@@ -295,6 +297,52 @@ export default {
     this.getLatestBlocks();
     this.getProducers();
     this.getTPS();
+  },
+  watch: {
+    latestBlocks: {
+      immediate: true,
+      handler(latestBlocks) {
+        const data = latestBlocks;
+        if (!data) return;
+        let transactions = [];
+        const trxObj = {};
+        data.forEach(elem => {
+          if (elem.transactions && elem.transactions.length > 0) {
+            elem.transactions.forEach(tr => {
+              if (!trxObj[elem.block_num]) {
+                trxObj[elem.block_num] = [];
+              }
+              if (tr.trx && tr.trx.transaction && tr.trx.transaction.actions) {
+                tr.trx.transaction.actions.forEach(act => {
+                  act.block_num = tr.trx.id;
+                });
+                Array.prototype.push.apply(
+                  trxObj[elem.block_num],
+                  tr.trx.transaction.actions
+                );
+              }
+            });
+          }
+        });
+
+        Object.keys(trxObj).forEach(key => {
+          Array.prototype.push.apply(transactions, trxObj[key]);
+        });
+        transactions.reverse();
+
+        if (transactions.length >= this.offsetPageElems) {
+          let blocks = Object.keys(trxObj);
+          blocks.forEach((key, index) => {
+            if (index < blocks.length - this.offsetPageElems) {
+              delete trxObj[key];
+            }
+          });
+          this.latestActions = transactions.slice(0, this.offsetPageElems);
+          return;
+        }
+        this.latestActions = transactions;
+      }
+    }
   }
 };
 </script>
