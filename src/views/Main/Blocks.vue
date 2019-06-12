@@ -71,6 +71,7 @@ export default {
     }
     .producer {
       /*cursor: pointer;*/
+      text-transform: capitalize;
       .text("tiny", "empher", "NunitoSans-Italic");
     }
     .timestamp {

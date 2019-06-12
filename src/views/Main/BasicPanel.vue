@@ -148,6 +148,7 @@ export default {
         .text("title", "main", "NunitoSans-Bold");
       }
       .value {
+        text-transform: capitalize;
         .text("title", "main", "OPTIEdgarBold-Extended");
         &.light {
           .text("title", "light", "NunitoSans-Bold");

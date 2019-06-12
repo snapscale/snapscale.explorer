@@ -29,14 +29,12 @@
       key="controlled_accounts"
     >
       <div class="controlled_accounts">
-        <div
+        <AccountLink
           v-for="(acc, index) in controlledAccounts"
           :key="index"
-          @click="goAccount(acc)"
+          :name="acc"
           class="controlled_account"
-        >
-          {{ acc }}
-        </div>
+        />
       </div>
     </a-tab-pane>
   </a-tabs>
@@ -45,12 +43,12 @@
 <script>
 import Moment from "moment";
 import BaseTable from "@/components/BaseTable";
-import EventBus from "@/eventBus";
 import VueJsonPretty from "vue-json-pretty";
+import AccountLink from "@/components/AccountLink";
 
 export default {
   name: "InfoTabs",
-  components: { BaseTable, VueJsonPretty },
+  components: { AccountLink, BaseTable, VueJsonPretty },
   props: {
     account: Object,
     actions: Array,
@@ -104,27 +102,12 @@ export default {
           label: "Action data",
           render: (h, val, row) => {
             const action = row?.action_trace?.act;
-            const { goAccount } = this;
             return (
               <div class="action_data">
                 <div class="transfer">
-                  <span
-                    class="account"
-                    onClick={() => {
-                      goAccount(action.data.from);
-                    }}
-                  >
-                    {action.data.from}
-                  </span>
+                  <AccountLink name={action.data.from} />
                   <span style="color: #3F3755">→</span>
-                  <span
-                    class="account"
-                    onClick={() => {
-                      goAccount(action.data.to);
-                    }}
-                  >
-                    {action.data.to}
-                  </span>
+                  <AccountLink name={action.data.to} />
                 </div>
                 <div class="bottom">
                   <span class="memo">{action.data.memo}</span>
@@ -163,16 +146,7 @@ export default {
           key: "from",
           label: "From",
           render: (h, val, row) => {
-            const { goAccount } = this;
-            return (
-              <span
-                onClick={() => {
-                  goAccount(row?.action_trace?.act?.data?.from);
-                }}
-              >
-                {row?.action_trace?.act?.data?.from}
-              </span>
-            );
+            return <AccountLink name={row?.action_trace?.act?.data?.from} />;
           },
           width: 110
         },
@@ -180,16 +154,7 @@ export default {
           key: "to",
           label: "To",
           render: (h, val, row) => {
-            const { goAccount } = this;
-            return (
-              <span
-                onClick={() => {
-                  goAccount(row?.action_trace?.act?.data?.to);
-                }}
-              >
-                {row?.action_trace?.act?.data?.to}
-              </span>
-            );
+            return <AccountLink name={row?.action_trace?.act?.data?.to} />;
           },
           width: 110
         },
@@ -238,7 +203,7 @@ export default {
               row?.required_auth?.accounts.forEach(acc => {
                 ele.push(
                   <div class="account">
-                    <span class="actor">{acc?.permission?.actor}</span>
+                    <AccountLink name={acc?.permission?.actor} class="actor" />
                     <span class="weight">{acc?.weight}</span>
                   </div>
                 );
@@ -275,11 +240,7 @@ export default {
       return this.controlledAccount?.controlled_accounts || [];
     }
   },
-  methods: {
-    goAccount(name) {
-      EventBus.$emit("goAccount", name);
-    }
-  }
+  methods: {}
 };
 </script>
 
@@ -343,10 +304,6 @@ export default {
 
       .action_data {
         .transfer {
-          .account {
-            cursor: pointer;
-          }
-
           flex-shrink: 0;
           .text("tiny", "empher", "NunitoSans-Regular");
         }
@@ -387,7 +344,6 @@ export default {
     .to,
     .from {
       .text("text", "empher", "NunitoSans-Regular");
-      cursor: pointer;
     }
     .memo {
       width: 300px;
@@ -431,7 +387,6 @@ export default {
 
         .actor {
           .text("text", "empher", "NunitoSans-Regular");
-          cursor: pointer;
         }
 
         .weight {
@@ -446,10 +401,6 @@ export default {
     padding: 30px 0;
     .controlled_account {
       .text("text", "empher", "NunitoSans-Regular");
-      cursor: pointer;
-      /*+.controlled_account{*/
-      /*    margin-top: 51px;*/
-      /*}*/
       padding: 25px 80px;
       &:not(:last-child) {
         box-shadow: 0 1px 0 0 #eaedf3;

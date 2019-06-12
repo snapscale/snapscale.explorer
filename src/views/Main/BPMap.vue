@@ -10,6 +10,7 @@ import "echarts/lib/component/geo";
 import "echarts/lib/chart/effectScatter";
 import "echarts/lib/chart/scatter";
 import "echarts/lib/component/tooltip";
+import { capitalize } from "@/utils";
 
 export default {
   name: "BPMap",
@@ -37,7 +38,9 @@ export default {
           formatter({ data }) {
             const { name, url } = data;
             return `<div style="display: flex;align-items: flex-start;flex-direction: column">
-                        <span style="font-size: 14px;line-height: 19px;color:#ffffff;font-family: NunitoSans-Bold">${name}</span>
+                        <span style="font-size: 14px;line-height: 19px;color:#ffffff;font-family: NunitoSans-Bold">${capitalize(
+                          name
+                        )}</span>
                         <span style="font-size: 12px;line-height: 16px;color:#ffffff;font-family: NunitoSans-Regular">${url}</span>
                     </div>`;
           }
@@ -116,7 +119,7 @@ export default {
               lineHeight: 20,
               fontFamily: "NunitoSans-Regular",
               formatter(params) {
-                return params.name;
+                return capitalize(params.name);
               }
             },
             zlevel: 2,

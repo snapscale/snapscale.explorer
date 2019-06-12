@@ -2,24 +2,21 @@
   <div class="token_tag">
     <span class="amount">{{ amount | numberFormat }}</span>
     <span class="currency">{{ currency }}</span>
-    <span class="contract" @click="goAccount(contract)">{{ contract }}</span>
+    <AccountLink :name="contract" class="contract" />
   </div>
 </template>
 
 <script>
-import EventBus from "@/eventBus";
+import AccountLink from "@/components/AccountLink";
 export default {
   name: "TokenTag",
+  components: { AccountLink },
   props: {
     amount: Number,
     currency: String,
     contract: String
   },
-  methods: {
-    goAccount(name) {
-      EventBus.$emit("goAccount", name);
-    }
-  }
+  methods: {}
 };
 </script>
 
@@ -41,7 +38,6 @@ export default {
   }
   .contract {
     margin-left: 5px;
-    cursor: pointer;
     .text("tiny", "empher", "NunitoSans-Regular");
   }
 }

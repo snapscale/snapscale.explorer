@@ -58,3 +58,6 @@ export function loading(loading_var) {
     return descriptor;
   };
 }
+
+export const capitalize = s =>
+  s.substr(0, 1).toUpperCase() + s.substr(1).toLowerCase();

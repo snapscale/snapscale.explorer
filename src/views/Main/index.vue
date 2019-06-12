@@ -24,7 +24,7 @@
 
     <div class="row">
       <Blocks style="margin-right: 30px" :data="latestBlocks" />
-      <LatestActions :data="latestActions" @goAccount="goAccount" />
+      <LatestActions :data="latestActions" />
     </div>
 
     <div class="row" style="margin-bottom: 30px">
@@ -43,7 +43,6 @@ import Transaction from "@/views/Main/Transaction";
 import BPMap from "@/views/Main/BPMap";
 import BPInfo from "./bp_info";
 import BasicPanel from "@/views/Main/BasicPanel";
-import EventBus from "@/eventBus";
 
 export default {
   components: {
@@ -89,7 +88,9 @@ export default {
 
       ungerKey: "EOS1111111111111111111111111111111114T1Anm",
 
-      latestActions: null
+      latestActions: null,
+
+      trxObj: {}
     };
   },
   computed: {
@@ -150,10 +151,6 @@ export default {
     }
   },
   methods: {
-    goAccount(query) {
-      EventBus.$emit("goAccount", query);
-    },
-
     async getLastBlocks(blocks) {
       const info = await this.$apis.getInfo({});
       const { head_block_num } = info;
@@ -305,19 +302,18 @@ export default {
         const data = latestBlocks;
         if (!data) return;
         let transactions = [];
-        const trxObj = {};
         data.forEach(elem => {
           if (elem.transactions && elem.transactions.length > 0) {
             elem.transactions.forEach(tr => {
-              if (!trxObj[elem.block_num]) {
-                trxObj[elem.block_num] = [];
+              if (!this.trxObj[elem.block_num]) {
+                this.trxObj[elem.block_num] = [];
               }
               if (tr.trx && tr.trx.transaction && tr.trx.transaction.actions) {
                 tr.trx.transaction.actions.forEach(act => {
                   act.block_num = tr.trx.id;
                 });
                 Array.prototype.push.apply(
-                  trxObj[elem.block_num],
+                  this.trxObj[elem.block_num],
                   tr.trx.transaction.actions
                 );
               }
@@ -325,16 +321,16 @@ export default {
           }
         });
 
-        Object.keys(trxObj).forEach(key => {
-          Array.prototype.push.apply(transactions, trxObj[key]);
+        Object.keys(this.trxObj).forEach(key => {
+          Array.prototype.push.apply(transactions, this.trxObj[key]);
         });
         transactions.reverse();
 
         if (transactions.length >= this.offsetPageElems) {
-          let blocks = Object.keys(trxObj);
+          let blocks = Object.keys(this.trxObj);
           blocks.forEach((key, index) => {
             if (index < blocks.length - this.offsetPageElems) {
-              delete trxObj[key];
+              delete this.trxObj[key];
             }
           });
           this.latestActions = transactions.slice(0, this.offsetPageElems);

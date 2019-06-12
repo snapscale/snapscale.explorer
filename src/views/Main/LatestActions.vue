@@ -18,17 +18,9 @@
             <div class="bottom" v-if="action.data">
               <div class="data">
                 <span class="transfer">
-                  <span
-                    class="account"
-                    @click="$emit('goAccount', action.data.from)"
-                    >{{ action.data.from }}</span
-                  >
+                  <AccountLink :name="action.data.from" />
                   <span style="color: #3F3755">→</span>
-                  <span
-                    class="account"
-                    @click="$emit('goAccount', action.data.to)"
-                    >{{ action.data.to }}</span
-                  >
+                  <AccountLink :name="action.data.to" />
                 </span>
                 <span class="memo">{{ action.data.memo }}</span>
               </div>
@@ -46,14 +38,14 @@
 
 <script>
 import Panel from "@/components/Panel";
+import AccountLink from "@/components/AccountLink";
 
 export default {
   name: "LatestActions",
-  components: { Panel },
+  components: { AccountLink, Panel },
   props: {
     data: Array
-  },
-  methods: {}
+  }
 };
 </script>
 
@@ -163,11 +155,8 @@ export default {
               align-items: center;
 
               .transfer {
-                .account {
-                  cursor: pointer;
-                }
+                .text("text", "empher", "NunitoSans-Regular");
                 flex-shrink: 0;
-                .text("tiny", "empher", "NunitoSans-Regular");
               }
 
               .memo {

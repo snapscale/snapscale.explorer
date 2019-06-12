@@ -32,13 +32,13 @@ export default {
           label: "STATUS",
           width: 180,
           render: (h, val, row) => {
-            if (row.index <= 21 && row.owner !== this.producer) {
-              return <span class="top">TOP 21</span>;
+            if (row.index <= 11 && row.owner !== this.producer) {
+              return <span class="top">TOP 11</span>;
             }
             if (row.owner === this.producer) {
               return <span class="producing">Producing</span>;
             }
-            if (row.index > 21 && row.owner !== this.producer) {
+            if (row.index > 11 && row.owner !== this.producer) {
               return <span class="standby">Standby</span>;
             }
           }
@@ -87,6 +87,7 @@ export default {
     }
     .owner {
       .text("text", "dark", "NunitoSans-Bold");
+      text-transform: capitalize;
     }
 
     .url {
@@ -97,6 +98,7 @@ export default {
     .location {
       display: flex;
       align-items: center;
+      width: 100%;
       .flag_wrapper {
         width: 24px;
         height: 24px;

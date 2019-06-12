@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import EventBus from "@/eventBus";
 import * as types from "@/store/mutation-types";
+import { Base64 } from "js-base64";
 
 export default {
   name: "NavBar",
@@ -45,7 +45,12 @@ export default {
   methods: {
     onSearch(query) {
       this.$store.commit(types.SET_QUERY, query);
-      EventBus.$emit("goAccount", query);
+      this.$router.push({
+        name: "account",
+        query: {
+          query: Base64.encode(query)
+        }
+      });
     }
   },
   created() {},

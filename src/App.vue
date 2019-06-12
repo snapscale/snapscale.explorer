@@ -9,7 +9,6 @@
 <script>
 import NavBar from "@/components/NavBar";
 import EventBus from "@/eventBus";
-import { Base64 } from "js-base64";
 
 export default {
   components: { NavBar },
@@ -19,15 +18,6 @@ export default {
     };
   },
   created() {
-    EventBus.$on("goAccount", query => {
-      this.$router.push({
-        name: "account",
-        query: {
-          query: Base64.encode(query)
-        }
-      });
-    });
-
     EventBus.$on("loading", loading => {
       this.loading = loading;
     });
