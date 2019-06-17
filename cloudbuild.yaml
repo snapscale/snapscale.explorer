@@ -4,6 +4,12 @@ steps:
   name: gcr.io/cloud-builders/docker
   args: ['build', '-t', 'asia.gcr.io/$PROJECT_ID/ss-explorer:$COMMIT_SHA', '-t', 'asia.gcr.io/$PROJECT_ID/ss-explorer:latest', '--cache-from', 'asia.gcr.io/$PROJECT_ID/ss-explorer:latest', '-f', 'Dockerfile', '.']
 
-images: ['asia.gcr.io/$PROJECT_ID/ss-explorer:$COMMIT_SHA']
+- id: docker push 
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'asia.gcr.io/$PROJECT_ID/ss-explorer:$COMMIT_SHA']
+
+- id: docker push latest
+  name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'asia.gcr.io/$PROJECT_ID/ss-explorer:latest']
 
 images: ['asia.gcr.io/$PROJECT_ID/ss-explorer:latest']
