@@ -65,8 +65,8 @@ export default {
           key: "rewards",
           label: "REWARDS PER DAY",
           width: 180,
-          render(h, val) {
-            return `${val} XST`;
+          render() {
+            return `${(302136).toLocaleString()} XST`;
           }
         }
       ]
@@ -99,6 +99,8 @@ export default {
       display: flex;
       align-items: center;
       width: 100%;
+      padding-left: 65px;
+      box-sizing: border-box;
       .flag_wrapper {
         width: 24px;
         height: 24px;
