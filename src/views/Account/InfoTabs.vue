@@ -10,7 +10,7 @@
     <a-tab-pane tab="TOKEN TRANSFER" key="token_transfer">
       <BaseTable
         :columns="tokenTransferColumns"
-        :data="actions"
+        :data="transferActions"
         class="token_transfer_table"
       />
     </a-tab-pane>
@@ -81,7 +81,7 @@ export default {
           render(h, val, row) {
             return Moment(row?.createdAt).format("MMMM Do YYYY, h:mm:ss a");
           },
-          width: 220
+          width: 200
         },
         {
           key: "name",
@@ -95,28 +95,39 @@ export default {
               <span class="action_name">{row?.action_trace?.act?.name}</span>
             ];
           },
-          width: 190
+          width: 200
         },
         {
           key: "action",
           label: "Action data",
           render: (h, val, row) => {
             const action = row?.action_trace?.act;
-            return (
-              <div class="action_data">
-                <div class="transfer">
-                  <AccountLink name={action.data.from} />
-                  <span style="color: #3F3755">→</span>
-                  <AccountLink name={action.data.to} />
+            let res;
+            if (action.name === "transfer") {
+              res = (
+                <div class="action_data">
+                  <div class="transfer">
+                    <AccountLink name={action.data.from} />
+                    <span style="color: #3F3755">→</span>
+                    <AccountLink name={action.data.to} />
+                  </div>
+                  <div class="bottom">
+                    <span class="memo">{action.data.memo}</span>
+                    <span class="quantity">{action.data.quantity}</span>
+                  </div>
                 </div>
-                <div class="bottom">
-                  <span class="memo">{action.data.memo}</span>
-                  <span class="quantity">{action.data.quantity}</span>
+              );
+            } else {
+              const memo = action ? JSON.stringify(action.data) : "";
+              res = (
+                <div class="memo_data" title={memo}>
+                  {memo}
                 </div>
-              </div>
-            );
+              );
+            }
+            return res;
           },
-          width: 410
+          width: 380
         }
       ],
       tokenTransferColumns: [
@@ -146,9 +157,10 @@ export default {
           key: "from",
           label: "From",
           render: (h, val, row) => {
+            console.log(row);
             return <AccountLink name={row?.action_trace?.act?.data?.from} />;
           },
-          width: 110
+          width: 100
         },
         {
           key: "to",
@@ -156,7 +168,7 @@ export default {
           render: (h, val, row) => {
             return <AccountLink name={row?.action_trace?.act?.data?.to} />;
           },
-          width: 110
+          width: 100
         },
         {
           key: "memo",
@@ -164,7 +176,7 @@ export default {
           render: (h, val, row) => {
             return row?.action_trace?.act?.data?.memo;
           },
-          width: 340
+          width: 320
         },
         {
           key: "quantity",
@@ -219,7 +231,7 @@ export default {
           render(h, val, row) {
             return row?.required_auth?.threshold;
           },
-          width: 180
+          width: 160
         },
         {
           key: "weight",
@@ -227,12 +239,18 @@ export default {
           render(h, val, row) {
             return row?.required_auth?.keys[0]?.weight;
           },
-          width: 180
+          width: 160
         }
       ]
     };
   },
   computed: {
+    transferActions() {
+      if (!this.actions) return null;
+      return this.actions.filter(
+        action => action?.action_trace?.act?.name === "transfer"
+      );
+    },
     permissions() {
       return this.account?.permissions || [];
     },
@@ -327,6 +345,11 @@ export default {
             .text("tiny", "dark", "NunitoSans-Regular");
           }
         }
+      }
+
+      .memo_data {
+        .text-ellipsis();
+        .text("tiny", "light", "NunitoSans-Regular");
       }
     }
   }
