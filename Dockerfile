@@ -2,6 +2,9 @@
 # compile
 FROM node:10
 COPY html /html
+WORKDIR /html
+RUN npm install
+RUN npm run build
 
 # step 1
 # server

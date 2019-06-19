@@ -3,3 +3,8 @@
 
 # build
 /html/output
+/html/node_modules
+/html/package-lock.json
+
+# cache
+.DS_Store

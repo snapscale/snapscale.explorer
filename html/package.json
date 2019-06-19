@@ -1,0 +1,46 @@
+{
+  "name": "snapscale-explorer",
+  "version": "2.0.0",
+  "description": "blockchain explorer for snapscale",
+  "private": true,
+  "scripts": {
+    "build": "webpack --config webpack.config.js && cp -r resource/* output/src/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/xeniroio/snapscale-explorer.git"
+  },
+  "keywords": [
+    "snapscale",
+    "xst"
+  ],
+  "author": "Miguel Cao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/xeniroio/snapscale-explorer/issues"
+  },
+  "homepage": "https://github.com/xeniroio/snapscale-explorer#readme",
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-transform-react-pug": "^7.0.1",
+    "clean-webpack-plugin": "^3.0.0",
+    "css-loader": "^3.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "mini-css-extract-plugin": "^0.7.0",
+    "node-sass": "^4.12.0",
+    "pug": "^2.0.4",
+    "pug-loader": "^2.4.0",
+    "sass-loader": "^7.1.0",
+    "webpack": "^4.34.0",
+    "webpack-cli": "^3.3.4"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.1.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.1"
+  }
+}
