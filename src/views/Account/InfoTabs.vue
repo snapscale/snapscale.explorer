@@ -76,10 +76,10 @@ export default {
           width: 180
         },
         {
-          key: "createdAt",
+          key: "date",
           label: "Date",
           render(h, val, row) {
-            return Moment(row?.createdAt).format("MMMM Do YYYY, h:mm:ss a");
+            return Moment(row?.block_time).format("MMMM Do YYYY, h:mm:ss a");
           },
           width: 200
         },
@@ -136,7 +136,7 @@ export default {
           label: "Time",
           width: 110,
           render(h, val, row) {
-            const time = Moment(row?.createdAt);
+            const time = Moment(row?.block_time);
             return [
               <div>{time.format("MMMM Do YYYY")}</div>,
               <div>{time.format("h:mm:ss a")}</div>
