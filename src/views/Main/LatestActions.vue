@@ -16,20 +16,24 @@
               <div class="action_type">[{{ action.name }}]</div>
             </div>
             <div class="bottom" v-if="action.data">
-              <div class="data">
-                <span class="transfer">
-                  <AccountLink :name="action.data.from" />
-                  <span style="color: #3F3755">→</span>
-                  <AccountLink :name="action.data.to" />
-                </span>
-                <span class="memo">{{ action.data.memo }}</span>
-              </div>
-              <div class="quantity">{{ action.data.quantity }}</div>
+              <template v-if="action.name === 'transfer'">
+                <div class="data">
+                  <span class="transfer">
+                    <AccountLink :name="action.data.from" />
+                    <span style="color: #3F3755">→</span>
+                    <AccountLink :name="action.data.to" />
+                  </span>
+                  <span class="memo">{{ action.data.memo }}</span>
+                </div>
+                <div class="quantity">{{ action.data.quantity }}</div>
+              </template>
+              <template v-else>
+                <div class="memo_data" :title="JSON.stringify(action.data)">
+                  {{ JSON.stringify(action.data) }}
+                </div>
+              </template>
             </div>
           </div>
-          <!--          <div class="detail">-->
-          <!--            <span v-for="i in 3" class="circle" :key="i" />-->
-          <!--          </div>-->
         </div>
       </div>
     </div>
@@ -147,6 +151,10 @@ export default {
 
           .bottom {
             margin-top: 4px;
+            .memo_data {
+              .text-ellipsis();
+              .text("tiny", "light", "NunitoSans-Regular");
+            }
 
             .data {
               flex-grow: 1;
