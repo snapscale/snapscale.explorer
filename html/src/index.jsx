@@ -4,8 +4,8 @@ import Router from './router.jsx';
 
 import './sass/index.scss';
 
-window._x = {}
+window._x = {};
 ReactDOM.render(
-    <Router/>,
-    document.getElementById('app')
+  <Router />,
+  document.getElementById('app'),
 );
