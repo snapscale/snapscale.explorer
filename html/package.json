@@ -22,8 +22,10 @@
   "homepage": "https://github.com/xeniroio/snapscale-explorer#readme",
   "devDependencies": {
     "@babel/core": "^7.4.5",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
     "@babel/preset-env": "^7.4.5",
     "@babel/preset-react": "^7.0.0",
+    "acorn": "^6.1.1",
     "babel-eslint": "^10.0.2",
     "babel-loader": "^8.0.6",
     "babel-plugin-transform-react-pug": "^7.0.1",
@@ -44,6 +46,7 @@
     "webpack-cli": "^3.3.4"
   },
   "dependencies": {
+    "@loadable/component": "^5.10.1",
     "@material-ui/core": "^4.1.1",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",

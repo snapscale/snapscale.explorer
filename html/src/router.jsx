@@ -1,24 +1,27 @@
 import React from 'react';
-import {
-  BrowserRouter as Router, Route, Switch, Redirect,
-} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import withWidth from '@material-ui/core/withWidth';
+import loadable from '@loadable/component';
 
-import Index from './pages/index/index.jsx';
-import E404 from './pages/404/404.jsx';
+const Index = loadable(() => import('./pages/index/index.jsx'));
+const E404 = loadable(() => import('./pages/404/404.jsx'));
 
-function AppRouter(props) {
-  window._x.width = props.width;
-  return pug`
-    Router
-      Switch
-        Route(
-          path='/',
-          exact,
-          component=Index,
-        )
-        Route(component=E404)
-  `;
+class AppRouter extends React.Component {
+  render() {
+    const { width } = this.props;
+    _x.width = width;
+    return pug`
+      Router
+        Switch
+          Route(path='/', exact, component=Index)
+          Route(component=E404)
+    `;
+  }
 }
+
+AppRouter.propTypes = {
+  width: PropTypes.string.isRequired,
+};
 
 export default withWidth()(AppRouter);

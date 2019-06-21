@@ -1,14 +1,14 @@
 import React from 'react';
-import Container from '@material-ui/core/Container';
+import Basic from '../../templates/basic/basic.jsx';
 
 class E404 extends React.Component {
   render() {
-    const path = window.location.pathname;
-    const { width } = window._x;
+    const { pathname } = window.location;
+    const { width } = _x;
     return pug`
-      Container(maxWidth=width)
+      Basic
         p.greeting 404!
-        |path => #{path} 
+        |path => #{pathname} 
     `;
   }
 }

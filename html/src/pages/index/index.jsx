@@ -1,11 +1,11 @@
 import React from 'react';
+import Basic from '../../templates/basic/basic.jsx';
 
 class Index extends React.Component {
   render() {
     return pug`
-      .wrapper
-        p.greeting Hello WorldX!
-      button Click Me
+      Basic
+        | 123
     `;
   }
 }

@@ -1,15 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Container from '@material-ui/core/Container';
+import loadable from '@loadable/component';
+
+const Header = loadable(() => import('../../components/header/header.jsx'));
 
 class Basic extends React.Component {
   render() {
-    const path = window.location.pathname;
-    const { width } = window._x;
+    const { width } = _x;
     const { children } = this.props;
     return pug`
       Container(maxWidth=width)
-        p.greeting 404!
-        |path => #{path}
+        Header
+        = children
     `;
   }
 }

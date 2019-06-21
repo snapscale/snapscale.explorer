@@ -1,4 +1,16 @@
-body, html {
+@import 'color.scss';
+@import 'fonts.scss';
+
+* {
   margin: 0;
   padding: 0;
+}
+
+html {
+  background-color: $color-bg;
+  font-family: $fonts-normal;
+}
+
+.block {
+  margin-bottom: 20px;
 }

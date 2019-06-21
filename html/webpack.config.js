@@ -14,6 +14,7 @@ module.exports = {
   output: {
     path: path.resolve(baseDir, 'output', 'src'),
     filename: '[name].js',
+    chunkFilename: '[id].js',
     publicPath: '/src/',
   },
   module: {
@@ -25,10 +26,6 @@ module.exports = {
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-env', '@babel/preset-react'],
-          plugins: [pugParser],
-        },
       },
       {
         test: /\.scss$/,
@@ -53,4 +50,9 @@ module.exports = {
       filename: '../index.html',
     }),
   ],
-};
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    },
+  },
+}
