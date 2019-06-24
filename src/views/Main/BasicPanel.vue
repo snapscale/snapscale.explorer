@@ -60,7 +60,7 @@
           <span class="value">{{ totalSupply | numberFormat }}</span>
         </div>
         <div class="bottom">
-          <span class="label">Current XST/USD Prize</span>
+          <span class="label">Current XST/USD Price</span>
           <span class="value">{{ currentXST }}</span>
         </div>
       </div>
