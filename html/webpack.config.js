@@ -2,7 +2,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const pugParser = require('babel-plugin-transform-react-pug');
+const postcssImport = require('postcss-import');
 
 const baseDir = __dirname;
 
@@ -28,13 +28,53 @@ module.exports = {
         loader: 'babel-loader',
       },
       {
+        test: /\.(woff|woff2|eot|ttf)$/,
+        loader: 'file-loader?name=fonts/[name].[ext]',
+      },
+      {
+        test: /\.css?$/,
+        use: [{
+          loader: MiniCssExtractPlugin.loader,
+        }, 'css-loader'],
+      },
+      {
         test: /\.scss$/,
+        exclude: [
+          path.resolve(baseDir, 'src', 'sass'),
+        ],
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          { loader: 'css-loader', options: { modules: true } },
+          {
+            loader: 'postcss-loader',
+            options: {
+              plugins: loader => [
+                postcssImport({ root: loader.resourcePath }),
+              ],
+            },
+          },
+          'sass-loader',
+        ],
+      },
+      {
+        test: /\.scss$/,
+        include: [
+          path.resolve(baseDir, 'src', 'sass'),
+        ],
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
           },
           'css-loader',
           'sass-loader',
+        ],
+      },
+      {
+        test: /\.svg$/,
+        use: [
+          'file-loader',
         ],
       },
     ],
@@ -55,4 +95,4 @@ module.exports = {
       chunks: 'all',
     },
   },
-}
+};

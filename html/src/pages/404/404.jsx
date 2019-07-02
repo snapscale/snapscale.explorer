@@ -4,7 +4,6 @@ import Basic from '../../templates/basic/basic.jsx';
 class E404 extends React.Component {
   render() {
     const { pathname } = window.location;
-    const { width } = _x;
     return pug`
       Basic
         p.greeting 404!

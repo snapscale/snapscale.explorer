@@ -8,7 +8,18 @@
 
 html {
   background-color: $color-bg;
+  color: $color-font;
   font-family: $fonts-normal;
+}
+
+html,body {
+  height: 100%;
+}
+
+#app {
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .block {

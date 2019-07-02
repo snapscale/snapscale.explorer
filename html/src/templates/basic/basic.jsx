@@ -1,18 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Container from '@material-ui/core/Container';
-import loadable from '@loadable/component';
+import Grid from '@material-ui/core/Grid';
 
-const Header = loadable(() => import('../../components/header/header.jsx'));
+import styles from './basic.scss';
+
+import Header from '../../components/header/header.jsx';
+import Footer from '../../components/footer/footer.jsx';
 
 class Basic extends React.Component {
   render() {
-    const { width } = _x;
     const { children } = this.props;
     return pug`
-      Container(maxWidth=width)
-        Header
-        = children
+      div(className=styles.container)
+        Grid(
+          container
+          alignItem='center'
+          justify='space-between'
+          direction='column'
+          className=styles.grid
+        )
+          Grid(
+            item
+          )
+            Header
+            = children
+          Grid(item)
+            Footer
     `;
   }
 }

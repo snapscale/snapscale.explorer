@@ -1,77 +1,115 @@
 import React from 'react';
+import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import loadable from '@loadable/component';
-import PropTypes from 'prop-types';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import MenuItem from '@material-ui/core/MenuItem';
+import InputBase from '@material-ui/core/InputBase';
+import { makeStyles } from '@material-ui/core/styles';
 
-import './header.scss';
+import styles from './header.scss';
 
-const CustomizedSelect = loadable(() => import('../components/select/customizedSelect.jsx'));
+const useStyles = makeStyles(theme => ({
+  formControl: {
+    margin: theme.spacing(1),
+    minWidth: 100,
+  },
+  input: {
+    height: '20px',
+    lineHeight: '20px',
+    borderRadius: 4,
+    position: 'relative',
+    backgroundColor: theme.palette.background.paper,
+    border: '1px solid #ced4da',
+    fontSize: 12,
+    padding: '6px 10px',
+    transition: theme.transitions.create(['border-color', 'box-shadow']),
+    '&:focus': {
+      borderRadius: 4,
+      borderColor: '#80bdff',
+      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+    },
+  },
+}));
 
-const setLang = (lang) => {
-  const { utils } = _x;
-  utils.langs.set(lang);
-};
-
-const setNet = (lang) => {
-  const { utils } = _x;
-  utils.nets.set(lang);
+const HeaderMain = (props) => {
+  const classes = useStyles();
+  return pug`
+    Container(fixed)
+      Grid(
+        container
+        direction='row'
+        justify='space-between'
+        alignItems='center'
+        className=styles.header
+      )
+        Grid(item)
+          img(src='/src/images/logo-title.svg')
+        Grid(item)
+          FormControl
+            Select(
+              value=props.state.lang
+              onChange=props.setLang
+              input=${pug`
+                InputBase(classes={input:classes.input})
+              `}
+              className=classes.formControl
+            )
+              MenuItem(value='cn')
+                |CN
+              MenuItem(value='en')
+                |EN
+          FormControl
+            Select(
+              value=props.state.net
+              onChange=props.setNet
+              input=${pug`
+                InputBase(classes={input:classes.input})
+              `}
+              className=classes.formControl
+            )
+              MenuItem(value='main')
+                |Main
+              MenuItem(value='test')
+                |Test
+  `;
 };
 
 class Header extends React.Component {
-  render() {
-    const { width, config, utils } = _x;
-    const defaultLang = utils.langs.get();
-    const defaultNet = utils.nets.get();
+  constructor(props) {
+    super(props);
+    this.state = {
+      lang: _x.utils.langs.get(),
+      net: _x.utils.nets.get(),
+    };
+    this.setLang = this.setLang.bind(this);
+    this.setNet = this.setNet.bind(this);
+  }
 
+  setLang = (e) => {
+    const { value } = e.target;
+    _x.utils.langs.set(value);
+    this.setState({
+      lang: value,
+    });
+  };
+
+  setNet = (e) => {
+    const { value } = e.target;
+    _x.utils.nets.set(value);
+    this.setState({
+      net: value,
+    });
+  };
+
+  render() {
     return pug`
-      Grid.header(
-        container
-        direction="column"
-        justify="center"
-        alignItems="center"
-      )
-        Grid.main.block(
-          container
-          direction="row"
-          justify="space-between"
-          alignItems="center"
+      header
+        HeaderMain(
+          state=this.state
+          setLang=this.setLang
+          setNet=this.setNet
         )
-          Grid.logo(item)
-            Grid(
-              container
-              direction="row"
-              justify="space-between"
-              alignItems="center"
-            )
-              Typography(variant="h6")
-                |SnapScale Explorer
-          .navs
-            Grid.navs(
-              container
-              direction="row"
-              justify="flex-end"
-              alignItems="center"
-            )
-              Grid.selects(item)
-                CustomizedSelect(
-                  options=config.langs
-                  defaultValue=defaultLang
-                  cb=setLang
-                )
-                CustomizedSelect(
-                  options=config.nets
-                  defaultValue=defaultNet
-                  cb=setNet
-                )
-        Grid.search.block(
-          container
-          direction="row"
-          justify="space-between"
-          alignItems="center"
-        )
-          Grid(item)
-            |Search
     `;
   }
 }
