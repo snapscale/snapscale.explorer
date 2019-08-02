@@ -1,8 +1,8 @@
 _x.config = {};
 
 _x.config.langs = {
-  cn: '中文',
-  en: 'English',
+  cn: 'CN',
+  en: 'EN',
 };
 
 _x.config.nets = {

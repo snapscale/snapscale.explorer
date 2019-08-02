@@ -4,30 +4,27 @@ import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import InputBase from '@material-ui/core/InputBase';
+import Input from '@material-ui/core/Input';
 import { makeStyles } from '@material-ui/core/styles';
-
-import styles from './header.scss';
+import Hidden from '@material-ui/core/Hidden';
 
 const useStyles = makeStyles(theme => ({
+  header: {
+    padding: theme.spacing(2, 0),
+  },
   formControl: {
-    margin: theme.spacing(1),
+    marginLeft: theme.spacing(2),
     minWidth: 100,
   },
   input: {
-    height: '20px',
-    lineHeight: '20px',
-    borderRadius: 4,
-    position: 'relative',
-    backgroundColor: theme.palette.background.paper,
-    border: '1px solid #ced4da',
     fontSize: 12,
-    padding: '6px 10px',
-    transition: theme.transitions.create(['border-color', 'box-shadow']),
-    '&:focus': {
-      borderRadius: 4,
-      borderColor: '#80bdff',
-      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+    padding: '3px 4px',
+    backgroundColor: theme.palette.grey[200],
+    borderRadius: 2,
+  },
+  logo: {
+    [theme.breakpoints.down('xs')]: {
+      width: '80%',
     },
   },
 }));
@@ -41,37 +38,50 @@ const HeaderMain = (props) => {
         direction='row'
         justify='space-between'
         alignItems='center'
-        className=styles.header
+        className=classes.header
       )
         Grid(item)
-          img(src='/src/images/logo-title.svg')
-        Grid(item)
-          FormControl
-            Select(
-              value=props.state.lang
-              onChange=props.setLang
-              input=${pug`
-                InputBase(classes={input:classes.input})
-              `}
-              className=classes.formControl
-            )
-              MenuItem(value='cn')
-                |CN
-              MenuItem(value='en')
-                |EN
-          FormControl
-            Select(
-              value=props.state.net
-              onChange=props.setNet
-              input=${pug`
-                InputBase(classes={input:classes.input})
-              `}
-              className=classes.formControl
-            )
-              MenuItem(value='main')
-                |Main
-              MenuItem(value='test')
-                |Test
+          Grid(
+            container
+            direction='column'
+            justify='center'
+          )
+            Grid(item)
+              a(href='/')
+                img(
+                  src='/src/images/logo-title.svg'
+                  className=classes.logo
+                )
+        Hidden(xsDown)
+          Grid(item)
+            FormControl(className=classes.formControl)
+              Select(
+                value=props.state.lang
+                onChange=props.setLang
+                input=${pug`
+                  Input(
+                    disableUnderline
+                    classes={input:classes.input}
+                  )
+                `}
+              )
+                each val, index in Object.keys(_x.config.langs)
+                  MenuItem(value=val)
+                    ${_x.config.langs[val]}
+            FormControl(className=classes.formControl)
+              Select(
+                value=props.state.net
+                onChange=props.setNet
+                input=${pug`
+                  Input(
+                    disableUnderline
+                    classes={input:classes.input}
+                  )
+                `}
+              )
+                each val, index in Object.keys(_x.config.nets)
+                  MenuItem(value=val)
+                    ${_x.config.nets[val]}
   `;
 };
 

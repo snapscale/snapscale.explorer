@@ -1,10 +1,18 @@
-# Snapscale-Explorer 2.0.0
+# Snapscale-Explorer
 
->Miguel Cao 2019.06
+![](https://img.shields.io/badge/version-1.0.0-brightgreen) ![](https://img.shields.io/badge/author-Miguel-blue)
 
 ## Stacks
-- frontend
-    - webpack
-    - react
-    - sass
-    - material ui
+- webpack
+- react
+- sass
+- material ui
+
+## Plan
+- ### v1
+  Basic EOS Chain Explorer
+- ### v2
+  Basic EOS Chain Explorer  
+  Basic DAG Chain Explorer
+- ### v3
+  Customization Explorer
