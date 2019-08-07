@@ -10,22 +10,33 @@ import Hidden from '@material-ui/core/Hidden';
 
 const useStyles = makeStyles(theme => ({
   header: {
-    padding: theme.spacing(2, 0),
+    paddingTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
   },
   formControl: {
     marginLeft: theme.spacing(2),
     minWidth: 100,
   },
   input: {
-    fontSize: 12,
-    padding: '3px 4px',
+    fontSize: '7rem',
+    padding: '2rem 4rem',
     backgroundColor: theme.palette.grey[200],
-    borderRadius: 2,
+    borderRadius: 4,
+    lineHeight: 1.6,
+  },
+  icon: {
+    fontSize: '10rem',
+    height: '100%',
+    top: 0,
   },
   logo: {
+    paddingLeft: theme.spacing(0.5),
     [theme.breakpoints.down('xs')]: {
       width: '80%',
     },
+  },
+  li: {
+    fontSize: '7rem',
   },
 }));
 
@@ -64,9 +75,16 @@ const HeaderMain = (props) => {
                     classes={input:classes.input}
                   )
                 `}
+                classes={icon:classes.icon}
+                MenuProps={
+                  elevation:2
+                }
               )
                 each val, index in Object.keys(_x.config.langs)
-                  MenuItem(value=val)
+                  MenuItem(
+                    value=val
+                    classes={root:classes.li}
+                  )
                     ${_x.config.langs[val]}
             FormControl(className=classes.formControl)
               Select(
@@ -78,9 +96,16 @@ const HeaderMain = (props) => {
                     classes={input:classes.input}
                   )
                 `}
+                classes={icon:classes.icon}
+                MenuProps={
+                  elevation:2
+                }
               )
                 each val, index in Object.keys(_x.config.nets)
-                  MenuItem(value=val)
+                  MenuItem(
+                    value=val
+                    classes={root:classes.li}
+                  )
                     ${_x.config.nets[val]}
   `;
 };

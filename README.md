@@ -16,3 +16,10 @@
   Basic DAG Chain Explorer
 - ### v3
   Customization Explorer
+
+## Design Standard
+- unit base  
+  1rem = 2px  
+
+- font-size  
+  7rem+

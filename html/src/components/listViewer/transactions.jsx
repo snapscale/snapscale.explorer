@@ -24,16 +24,6 @@ const useStyles1 = makeStyles(theme => ({
   },
 }));
 
-function createData(block, tx, contract, time, info) {
-  return {
-    block, tx, contract, time, info,
-  };
-}
-
-const rows = [
-  createData(66880637, 'Tx:d2dbe7', 'eosplayaloud: yell', 'Jul-04-2019, 08:53:53', 'd43wednesday → offsideentry 0.2000 EOS'),
-];
-
 function TablePaginationActions(props) {
   const classes = useStyles1();
   const {
@@ -94,6 +84,7 @@ TablePaginationActions.propTypes = {
 };
 
 const Transactions = (props) => {
+  const { rows } = props;
   const classes = useStyles1();
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(25);
@@ -111,18 +102,23 @@ const Transactions = (props) => {
   return pug`
     Table
       TableBody
-        each item, index in rows
+        each item, index in rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
           TableRow
             TableCell
-              ${item.block}
+              =item.blockId
             TableCell
-              ${item.tx}
+              |TX:
+              =item.tx
             TableCell
-              ${item.contract}
+              =item.account
             TableCell
-              ${item.time}
+              =new Date(item.time).toLocaleTimeString()
             TableCell
-              ${item.info}
+              =item.from
+              |&nbsp;->&nbsp;
+              =item.to
+              |&nbsp;&nbsp;
+              =item.quantity
       TableFooter
         TableRow
           TablePagination(

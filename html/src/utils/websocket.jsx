@@ -33,7 +33,7 @@ ws.onmessage = (_evt) => {
     const dt = JSON.parse(_evt.data);
     handles(dt);
   } catch (e) {
-    console.error(e);
+    // console.error(e);
   }
 };
 

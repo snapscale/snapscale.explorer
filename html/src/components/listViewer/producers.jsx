@@ -116,23 +116,23 @@ const Producers = (props) => {
           TableCell
             |votes
       TableBody
-        each item, index in rows
+        each item, index in rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
           TableRow(
-            selected=item.status === 'producing' ? true : false
+            selected=item.producing ? true : false
           )
             TableCell
-              ${item.rank}
+              =(index+1)
             TableCell
-              a(href='/account/' + item.producer_name)
-                ${item.producer_name}
+              a(href='/account/' + item.owner)
+                =item.owner
             TableCell
-              ${item.producer_name}
+              =item.location
             TableCell
-              | N/A
-              // ${item.status}
+              =item.producing ? "Producing" : (item.is_active ? "Active" : "Stand by")
             TableCell
-              | N/A
-              // ${item.votes}
+              =parseInt((parseInt(item.total_votes) / 10000000000)).toLocaleString() + " Z"
+              |&nbsp;&nbsp;
+              =((parseInt(item.total_votes)/parseInt(item.total)) * 100).toFixed(2) + "%"
       TableFooter
         TableRow
           TablePagination(

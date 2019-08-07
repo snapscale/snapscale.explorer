@@ -58,8 +58,6 @@
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
-    "typeface-didact-gothic": "0.0.72",
-    "typeface-muli": "0.0.71",
-    "typeface-roboto": "0.0.54"
+    "typeface-nunito-sans": "0.0.72"
   }
 }

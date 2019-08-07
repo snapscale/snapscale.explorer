@@ -9,6 +9,9 @@ const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(2, 0),
   },
+  box: {
+    paddingLeft: '2rem',
+  },
 }));
 
 const FooterMain = (props) => {
@@ -23,7 +26,10 @@ const FooterMain = (props) => {
     )
       Grid(item)
         Typography(variant='caption')
-          Box(color='secondary.contrastText')
+          Box(
+            color='secondary.contrastText'
+            className=classes.box
+          )
             |© 2019 Xeniro
   `;
 };

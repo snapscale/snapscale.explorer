@@ -6,8 +6,15 @@ import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles(theme => ({
   icon: {
-    marginRight: theme.spacing(1),
+    paddingLeft: '2rem',
+    marginRight: theme.spacing(2),
     color: theme.palette.secondary.contrastText,
+    fontSize: '10rem',
+    width: '10rem',
+    height: '10rem',
+  },
+  text: {
+    lineHeight: '10rem',
   },
 }));
 
@@ -23,14 +30,19 @@ const Title = (props) => {
     )
       Icon(className=classes.icon)
       Typography(
-        variant='h3'
+        variant='h4'
         display='inline'
+        className=classes.text
       )
-        Box(
-          color='secondary.contrastText'
-          component='span'
+        Grid(
+          container
+          alignItems='center'
         )
-          ${Text}
+          Box(
+            color='secondary.contrastText'
+            component='span'
+          )
+            ${Text}
   `;
 };
 

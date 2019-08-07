@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    margin: theme.spacing(0, 0, 2, 0),
+    margin: theme.spacing(0, 0, 3, 0),
     padding: theme.spacing(2),
     [theme.breakpoints.down('xs')]: {
       padding: theme.spacing(1),
@@ -17,24 +17,24 @@ const useStyles = makeStyles(theme => ({
   },
   input: {
     padding: theme.spacing(0),
-    fontSize: '1.5rem',
+    fontSize: '12rem',
     color: theme.palette.secondary.contrastText,
-    [theme.breakpoints.down('xs')]: {
-      fontSize: '1rem',
+    [theme.breakpoints.down('md')]: {
+      fontSize: '10rem',
+    },
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '7rem',
     },
   },
   label: {
-    fontSize: '1.2rem',
+    fontSize: '10rem',
     color: `${theme.palette.secondary.contrastText} !important`,
-    [theme.breakpoints.down('xs')]: {
-      fontSize: '1rem',
-    },
   },
   positionStart: {
     color: `${theme.palette.secondary.contrastText} !important`,
-    fontSize: '1.5rem',
+    fontSize: '7rem',
     [theme.breakpoints.down('xs')]: {
-      fontSize: '1rem',
+      fontSize: '7rem',
     },
   },
   formControl: {
@@ -117,7 +117,7 @@ const Search = (props) => {
   const classes = useStyles();
   return pug`
     Paper(
-      elevation=0
+      elevation=1
       className=classes.paper
     )
       XTextField(...props)
