@@ -23,6 +23,10 @@ html,body {
   height: 100%;
 }
 
+img {
+  outline: none;
+}
+
 #app {
   height: 100%;
   overflow-y: scroll;

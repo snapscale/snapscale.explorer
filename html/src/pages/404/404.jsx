@@ -6,10 +6,10 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 import Basic from '../../templates/basic/basic.jsx';
+import NotFound from '../../components/notFound/notFound.jsx';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(10, 0),
     backgroundColor: 'transparent',
   },
 }));
@@ -22,17 +22,7 @@ const E404Main = (props) => {
       elevation=0
       className=classes.root
     )
-      Typography(variant='h4')
-        Box(color='primary.dark')
-          |404
-      br
-      Typography(variant='body1')
-        Box(color='primary.main')
-          |The page you are looking for could not be found
-      br
-      Typography(variant='body1')
-        Box(color='primary.main')
-          |path: #{props.pathname} 
+      NotFound(keyx='Page')
   `;
 };
 

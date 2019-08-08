@@ -50,8 +50,18 @@ const XTextField = (props) => {
   const { value } = props;
   const [values, setValues] = React.useState(value);
 
+  const keydown = (e) => {
+    if (e.key === 'Enter') {
+      console.log(e.target.value);
+      window.location.href = `/search/${e.target.value}`;
+    }
+  };
+
   const handleChange = (event) => {
-    console.log(event.target);
+    const { target } = event;
+    if (!target.onkeydown) {
+      target.onkeydown = keydown;
+    }
     setValues(event.target.value);
   };
 

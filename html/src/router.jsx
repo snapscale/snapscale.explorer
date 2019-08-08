@@ -18,6 +18,7 @@ class AppRouter extends React.Component {
           Switch
             Route(path='/', exact, component=Index)
             Route(path='/account/:id', exact, component=Account)
+            Route(path='/search/:id', exact, component=Account)
             Route(component=E404)
     `;
   }
