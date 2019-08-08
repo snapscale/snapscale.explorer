@@ -51,6 +51,7 @@ const XTextField = (props) => {
   const [values, setValues] = React.useState(value);
 
   const handleChange = (event) => {
+    console.log(event.target);
     setValues(event.target.value);
   };
 

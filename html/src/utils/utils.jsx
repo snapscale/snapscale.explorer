@@ -4,3 +4,4 @@ require('./storage.jsx');
 require('./langs.jsx');
 require('./nets.jsx');
 require('./websocket.jsx');
+require('./http.jsx');
