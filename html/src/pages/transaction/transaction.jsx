@@ -3,22 +3,23 @@ import Container from '@material-ui/core/Container';
 import Basic from '../../templates/basic/basic.jsx';
 
 import Search from '../../components/search/search.jsx';
-import AccountDetails from '../../components/accountDetails/accountDetails.jsx';
-import Actions from '../../components/actions/actions2.jsx';
+import TransactionDetails from '../../components/transactionDetails/transactionDetails.jsx';
+import Actions from '../../components/actions/actions.jsx';
 import Keys from '../../components/keys/keys.jsx';
 import NotFound from '../../components/notFound/notFound.jsx';
 
-const AccountMain = (props) => {
+const TransactionMain = (props) => {
   const [values, setValues] = React.useState({
     notfound: false,
     ld: true,
   });
 
-  if (!values.info && !values.notfound) {
-    _x.utils.request('account', JSON.stringify({
-      name: props.account,
+  if (!values.trace || (values.trace.id !== props.hash && !values.notfound)) {
+    _x.utils.request('transaction', JSON.stringify({
+      hash: props.hash,
     }), (data) => {
       try {
+        console.log(JSON.parse(data));
         setValues({ ...JSON.parse(data), ld: false });
       } catch (e) {
         setValues({ ld: false, notfound: true });
@@ -27,25 +28,24 @@ const AccountMain = (props) => {
   }
 
   return pug`
-    Search(value=props.account)
+    Search(value=props.hash)
     if values.notfound
-      NotFound(keyx='Account')
+      NotFound(keyx='Transaction')
     else
-      AccountDetails(values=values)
-      Keys(values=values)
+      TransactionDetails(values=values)
       Actions(values=values)
   `;
 };
 
-class Account extends React.Component {
+class Transaction extends React.Component {
   render() {
-    const account = window.location.pathname.split('/')[2];
+    const hash = window.location.pathname.split('/')[2];
     return pug`
       Basic
         Container(fixed)
-          AccountMain(account=account)
+          TransactionMain(hash=hash)
     `;
   }
 }
 
-export default Account;
+export default Transaction;

@@ -10,6 +10,7 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
+import TableHead from '@material-ui/core/TableHead';
 import TableFooter from '@material-ui/core/TableFooter';
 import TablePagination from '@material-ui/core/TablePagination';
 
@@ -21,6 +22,9 @@ const useStyles1 = makeStyles(theme => ({
   },
   pagination: {
     border: 0,
+  },
+  tableSm: {
+    width: '50rem',
   },
 }));
 
@@ -101,6 +105,18 @@ const Transactions = (props) => {
 
   return pug`
     Table
+      TableHead
+        TableRow
+          TableCell(className=classes.tableSm)
+            |Block Height
+          TableCell(className=classes.tableSm)
+            |Transaction Id
+          TableCell(className=classes.tableSm)
+            |Account & contract
+          TableCell(className=classes.tableSm)
+            |Timestamp
+          TableCell
+            |Info
       TableBody
         each item, index in rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
           TableRow
@@ -110,13 +126,18 @@ const Transactions = (props) => {
               |TX:
               =item.tx
             TableCell
-              =item.account
+              a(href='/account/' + item.account)
+                =item.account
+              |&nbsp;:&nbsp;
+              =item.name
             TableCell
               =new Date(item.time).toLocaleTimeString()
             TableCell
-              =item.from
+              a(href='/account/' + item.from)
+                =item.from
               |&nbsp;->&nbsp;
-              =item.to
+              a(href='/account/' + item.to)
+                =item.to
               |&nbsp;&nbsp;
               =item.quantity
       TableFooter

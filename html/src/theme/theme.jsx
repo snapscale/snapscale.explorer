@@ -45,6 +45,11 @@ const theme = createMuiTheme({
         top: 'calc(50% - 4rem)',
       },
     },
+    MuiChip: {
+      root: {
+        fontSize: '7rem',
+      },
+    },
   },
   palette: {
     primary: {

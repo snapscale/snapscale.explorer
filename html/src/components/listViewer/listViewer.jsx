@@ -87,6 +87,7 @@ const ListViewer = (props) => {
         blockId: data.block_num,
         tx: tx.trx.id.slice(0, 6),
         account: tx.trx.transaction.actions[0].account,
+        name: tx.trx.transaction.actions[0].name,
         time: data.timestamp,
         from: tx.trx.transaction.actions[0].data.from,
         to: tx.trx.transaction.actions[0].data.to,

@@ -34,6 +34,9 @@ const useStyles = makeStyles(theme => ({
   divider: {
     margin: theme.spacing(1, 0),
   },
+  span: {
+    color: theme.palette.grey[500],
+  },
 }));
 
 const LiveStatus = (props) => {
@@ -97,7 +100,8 @@ const LiveStatus = (props) => {
           StatusOne(
             Key="Current Block"
           )
-            =values.blocks.current_block.toLocaleString()
+            a(href='/block/' + values.blocks.current_block)
+              =values.blocks.current_block.toLocaleString()
         Grid(
           item
           md=6
@@ -121,7 +125,15 @@ const LiveStatus = (props) => {
           StatusOne(
             Key="Last Irreversible Block"
           )
-            =values.blocks.last_irreversible_block.toLocaleString()
+            a(href='/block/' + values.blocks.last_irreversible_block)
+              =values.blocks.last_irreversible_block.toLocaleString()
+            Typography(
+              variant='h6'
+              display='inline'
+              className=classes.span
+            )
+              |&nbsp;
+              =values.blocks.last_irreversible_block - values.blocks.current_block
         Grid(
           item
           md=6
@@ -132,6 +144,14 @@ const LiveStatus = (props) => {
           )
             =(values.io.ram_in_chain/1024).toLocaleString()
             |&nbsp;KB
+            Typography(
+              variant='h6'
+              display='inline'
+              className=classes.span
+            )
+              |&nbsp;≈&nbsp;
+              =(values.io.ram_in_chain/1024/1024/1024).toFixed(1)
+              |&nbsp;GB
         Grid(
           item
           md=6
@@ -142,7 +162,8 @@ const LiveStatus = (props) => {
           )
             Typography(variant='h6')
               Box
-                =values.producers.current_producer
+                a(href='/account/' + values.producers.current_producer)
+                  =values.producers.current_producer
         Grid(
           item
           md=6
@@ -182,7 +203,8 @@ const LiveStatus = (props) => {
           )
             Typography(variant='h6')
               Box
-                =values.producers.producer_loop[values.producers.current_producer]
+                a(href='/account/' + values.producers.producer_loop[values.producers.current_producer])
+                  =values.producers.producer_loop[values.producers.current_producer]
         Grid(
           item
           md=6

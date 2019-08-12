@@ -47,12 +47,12 @@ const Keys = (props) => {
             Typography(variant='h5')
               |VIEW
               |&nbsp;
-              =values.permissions.length
+              =values.info.permissions.length
               |&nbsp;
               |PERMISSIONS
         ExpansionPanelDetails(classes={root:classes.detail})
           if !values.ld
-            each item, index in values.permissions
+            each item, index in values.info.permissions
               Grid(container)
                 Grid(
                   item

@@ -3,20 +3,20 @@ import Container from '@material-ui/core/Container';
 import Basic from '../../templates/basic/basic.jsx';
 
 import Search from '../../components/search/search.jsx';
-import AccountDetails from '../../components/accountDetails/accountDetails.jsx';
-import Actions from '../../components/actions/actions2.jsx';
+import BlockDetails from '../../components/blockDetails/blockDetails.jsx';
+import Transactions from '../../components/transactions/transactions.jsx';
 import Keys from '../../components/keys/keys.jsx';
 import NotFound from '../../components/notFound/notFound.jsx';
 
-const AccountMain = (props) => {
+const BlockMain = (props) => {
   const [values, setValues] = React.useState({
     notfound: false,
     ld: true,
   });
 
-  if (!values.info && !values.notfound) {
-    _x.utils.request('account', JSON.stringify({
-      name: props.account,
+  if (values.block_num !== props.num && !values.notfound) {
+    _x.utils.request('block', JSON.stringify({
+      num: props.num,
     }), (data) => {
       try {
         setValues({ ...JSON.parse(data), ld: false });
@@ -27,25 +27,24 @@ const AccountMain = (props) => {
   }
 
   return pug`
-    Search(value=props.account)
+    Search(value=props.num)
     if values.notfound
-      NotFound(keyx='Account')
+      NotFound(keyx='Block')
     else
-      AccountDetails(values=values)
-      Keys(values=values)
-      Actions(values=values)
+      BlockDetails(values=values)
+      Transactions(values=values)
   `;
 };
 
-class Account extends React.Component {
+class Block extends React.Component {
   render() {
-    const account = window.location.pathname.split('/')[2];
+    const num = parseInt(window.location.pathname.split('/')[2], 10);
     return pug`
       Basic
         Container(fixed)
-          AccountMain(account=account)
+          BlockMain(num=num)
     `;
   }
 }
 
-export default Account;
+export default Block;
