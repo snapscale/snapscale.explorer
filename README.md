@@ -7,6 +7,7 @@
 - react
 - sass
 - material ui
+- echarts (Apache 2.0)
 
 ## Plan
 - ### v1

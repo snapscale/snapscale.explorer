@@ -121,10 +121,12 @@ const Transactions = (props) => {
         each item, index in rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
           TableRow
             TableCell
-              =item.blockId
+              a(href='/block/'+item.blockId)
+                =item.blockId
             TableCell
-              |TX:
-              =item.tx
+              a(href='/transaction/'+item.txr)
+                |TX:
+                =item.tx
             TableCell
               a(href='/account/' + item.account)
                 =item.account
