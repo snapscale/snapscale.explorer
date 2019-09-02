@@ -1,14 +1,29 @@
 import React from 'react';
-import loadable from '@loadable/component';
-import Basic from '../../templates/basic/basic.jsx';
+import Container from '@material-ui/core/Container';
+import Hidden from '@material-ui/core/Hidden';
 
-// const LiveSummary = loadable(() => import('../../components/liveSummary/liveSummary.jsx'));
+import Basic from '../../templates/basic/basic.jsx';
+import Search from '../../components/search/search.jsx';
+import Charts from '../../components/charts/charts.jsx';
+import LiveStatus from '../../components/liveStatus/liveStatus.jsx';
+import ListViewer from '../../components/listViewer/listViewer.jsx';
+
+const IndexMain = (props) => {
+  return pug`
+    Search
+    LiveStatus
+    Hidden(smDown)
+      Charts
+    ListViewer
+  `;
+};
 
 class Index extends React.Component {
   render() {
     return pug`
       Basic
-        LiveSummary
+        Container(fixed)
+          IndexMain
     `;
   }
 }

@@ -4,31 +4,39 @@ import Grid from '@material-ui/core/Grid';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
-import InputBase from '@material-ui/core/InputBase';
+import Input from '@material-ui/core/Input';
 import { makeStyles } from '@material-ui/core/styles';
-
-import styles from './header.scss';
+import Hidden from '@material-ui/core/Hidden';
 
 const useStyles = makeStyles(theme => ({
+  header: {
+    paddingTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
+  },
   formControl: {
-    margin: theme.spacing(1),
+    marginLeft: theme.spacing(2),
     minWidth: 100,
   },
   input: {
-    height: '20px',
-    lineHeight: '20px',
+    fontSize: '7rem',
+    padding: '2rem 4rem',
+    backgroundColor: theme.palette.grey[200],
     borderRadius: 4,
-    position: 'relative',
-    backgroundColor: theme.palette.background.paper,
-    border: '1px solid #ced4da',
-    fontSize: 12,
-    padding: '6px 10px',
-    transition: theme.transitions.create(['border-color', 'box-shadow']),
-    '&:focus': {
-      borderRadius: 4,
-      borderColor: '#80bdff',
-      boxShadow: '0 0 0 0.2rem rgba(0,123,255,.25)',
+    lineHeight: 1.6,
+  },
+  icon: {
+    fontSize: '10rem',
+    height: '100%',
+    top: 0,
+  },
+  logo: {
+    paddingLeft: theme.spacing(0.5),
+    [theme.breakpoints.down('xs')]: {
+      width: '80%',
     },
+  },
+  li: {
+    fontSize: '7rem',
   },
 }));
 
@@ -41,37 +49,64 @@ const HeaderMain = (props) => {
         direction='row'
         justify='space-between'
         alignItems='center'
-        className=styles.header
+        className=classes.header
       )
         Grid(item)
-          img(src='/src/images/logo-title.svg')
-        Grid(item)
-          FormControl
-            Select(
-              value=props.state.lang
-              onChange=props.setLang
-              input=${pug`
-                InputBase(classes={input:classes.input})
-              `}
-              className=classes.formControl
-            )
-              MenuItem(value='cn')
-                |CN
-              MenuItem(value='en')
-                |EN
-          FormControl
-            Select(
-              value=props.state.net
-              onChange=props.setNet
-              input=${pug`
-                InputBase(classes={input:classes.input})
-              `}
-              className=classes.formControl
-            )
-              MenuItem(value='main')
-                |Main
-              MenuItem(value='test')
-                |Test
+          Grid(
+            container
+            direction='column'
+            justify='center'
+          )
+            Grid(item)
+              a(href='/')
+                img(
+                  src='/src/images/logo-title.svg'
+                  className=classes.logo
+                )
+        Hidden(xsDown)
+          Grid(item)
+            FormControl(className=classes.formControl)
+              Select(
+                value=props.state.lang
+                onChange=props.setLang
+                input=${pug`
+                  Input(
+                    disableUnderline
+                    classes={input:classes.input}
+                  )
+                `}
+                classes={icon:classes.icon}
+                MenuProps={
+                  elevation:2
+                }
+              )
+                each val, index in Object.keys(_x.config.langs)
+                  MenuItem(
+                    value=val
+                    classes={root:classes.li}
+                  )
+                    ${_x.config.langs[val]}
+            FormControl(className=classes.formControl)
+              Select(
+                value=props.state.net
+                onChange=props.setNet
+                input=${pug`
+                  Input(
+                    disableUnderline
+                    classes={input:classes.input}
+                  )
+                `}
+                classes={icon:classes.icon}
+                MenuProps={
+                  elevation:2
+                }
+              )
+                each val, index in Object.keys(_x.config.nets)
+                  MenuItem(
+                    value=val
+                    classes={root:classes.li}
+                  )
+                    ${_x.config.nets[val]}
   `;
 };
 

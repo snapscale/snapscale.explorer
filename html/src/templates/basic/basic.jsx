@@ -21,6 +21,7 @@ class Basic extends React.Component {
         )
           Grid(
             item
+            className=styles.item
           )
             Header
             = children
