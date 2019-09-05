@@ -5,7 +5,6 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Hidden from '@material-ui/core/Hidden';
-import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -21,12 +20,15 @@ import IconButton from '@material-ui/core/IconButton';
 
 import Title from '../title/title.jsx';
 import Loading from '../loading/loading.jsx';
+import KovoBlock from '../kovoBlock/kovoBlock.jsx';
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    margin: theme.spacing(1, 0, 3, 0),
-    color: theme.palette.secondary.contrastText,
-    backgroundColor: theme.palette.grey[200],
+    padding: 0,
+    overflowX: 'auto',
+  },
+  link: {
+    color: '#766AF2',
   },
 }));
 
@@ -121,15 +123,14 @@ const Transactions = (props) => {
     setRowsPerPage(parseInt(event.target.value, 10));
   }
 
+  const langMap = _x.config.langsMap[_x.utils.langs.get()];
+
   return pug`
     Title(
-      Icon=SwapHorizIcon
-      Text='Transactions'
+      Icon='transaction'
+      Text=langMap[0xF004]
     )
-    Paper(
-      elevation=1
-      className=classes.paper
-    )
+    KovoBlock(className=classes.paper)
       if values.ld
         Loading
       else
@@ -137,21 +138,24 @@ const Transactions = (props) => {
           TableHead
             TableRow
               TableCell
-                |Transaction
+                =langMap[0x6000]
               TableCell
-                |Actions
+                =langMap[0x6001]
               TableCell
-                |CPU Usage
+                =langMap[0x6002]
               TableCell
-                |NET Usage
+                =langMap[0x6003]
               TableCell
-                |Expiration
+                =langMap[0x6004]
           TableBody
             each item, index in rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               TableRow
                 TableCell
-                  a(href='/transaction/'+item.trx.id)
-                    =item.trx.id
+                  a(
+                    href='/transaction/'+item.trx.id
+                    className=classes.link
+                  )
+                    =item.trx.id.substr(30)+'...'
                 TableCell
                   =item.trx.transaction.actions.length
                 TableCell

@@ -5,11 +5,11 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles(theme => ({
-  box: {
-    padding: theme.spacing(1, 2),
-  },
   title: {
-    color: theme.palette.grey[500],
+    color: '#333333',
+  },
+  x: {
+    flexBasis: 0,
   },
 }));
 
@@ -21,11 +21,12 @@ const StatusTwo = (props) => {
       container
       spacing=1
       alignItems='center'
-      className=classes.box
+      className=props.className
     )
       Grid(
         item
         xs=12
+        className=classes.x
       )
         Typography(variant='h5')
           Box(className=classes.title)
@@ -33,6 +34,7 @@ const StatusTwo = (props) => {
       Grid(
         item
         xs=12
+        className=classes.x
       )
         Typography(variant='h3')
           Box

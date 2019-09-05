@@ -101,20 +101,22 @@ const Producers = (props) => {
     setRowsPerPage(parseInt(event.target.value, 10));
   }
 
+  const langMap = _x.config.langsMap[_x.utils.langs.get()];
+
   return pug`
     Table
       TableHead
         TableRow
           TableCell
-            |Rank
+            =langMap[0x4100]
           TableCell
-            |Account
+            =langMap[0x4101]
           TableCell
-            |Location
+            =langMap[0x4102]
           TableCell
-            |Status
+            =langMap[0x4103]
           TableCell
-            |votes
+            =langMap[0x4104]
       TableBody
         each item, index in rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
           TableRow(
@@ -128,7 +130,7 @@ const Producers = (props) => {
             TableCell
               =item.location
             TableCell
-              =item.producing ? "Producing" : (item.is_active ? "Active" : "Stand by")
+              =item.producing ? langMap[0x4105] : (item.is_active ? langMap[0x4106] : langMap[0x4107])
             TableCell
               =parseInt((parseInt(item.total_votes) / 10000000000)).toLocaleString() + " Z"
               |&nbsp;&nbsp;
@@ -142,7 +144,6 @@ const Producers = (props) => {
             rowsPerPage=rowsPerPage
             page=page
             SelectProps={
-              inputProps: { 'aria-label': 'Rows per page' },
               native: true,
             }
             onChangePage=handleChangePage

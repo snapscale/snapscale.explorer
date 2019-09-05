@@ -1,41 +1,93 @@
 import React from 'react';
 import { lighten, makeStyles, withStyles } from '@material-ui/core/styles';
-import TimelineIcon from '@material-ui/icons/Timeline';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Divider from '@material-ui/core/Divider';
+import clsx from 'clsx';
 
+import KovoBlock from '../kovoBlock/kovoBlock.jsx';
 import Title from '../title/title.jsx';
 import StatusOne from './statusOne.jsx';
 import StatusTwo from './statusTwo.jsx';
 
 const BorderLinearProgress = withStyles({
   root: {
-    borderRadius: '1rem',
+    borderRadius: '0.5rem',
     height: 10,
-    backgroundColor: lighten('#333333', 0.5),
+    backgroundColor: '#EAEAEA',
   },
   bar: {
-    borderRadius: '1rem',
-    backgroundColor: '#333333',
+    borderRadius: '0.5rem',
+    backgroundColor: '#382AC7',
+  },
+})(LinearProgress);
+
+const BorderLinearProgress1 = withStyles({
+  root: {
+    borderRadius: '0.5rem',
+    height: 10,
+    backgroundColor: '#EAEAEA',
+  },
+  bar: {
+    borderRadius: '0.5rem',
+    backgroundColor: '#0CB5E5',
   },
 })(LinearProgress);
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    padding: theme.spacing(1, 0),
-    margin: theme.spacing(1, 0, 3, 0),
-    backgroundColor: theme.palette.grey[200],
-    color: theme.palette.secondary.contrastText,
+    padding: 0,
   },
   divider: {
-    margin: theme.spacing(1, 0),
+    height: 3,
   },
   span: {
-    color: theme.palette.grey[500],
+    fontSize: '0.7rem',
+    color: '#CCCCCC',
+    fontFamily: 'Nunito Sans',
+  },
+  span1: {
+    fontSize: '0.5rem',
+    color: '#999999',
+    fontFamily: 'OPTI',
+    letterSpacing: '0.5px',
+  },
+  firstLine: {
+    height: 80,
+  },
+  lastLine: {
+    height: 130,
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'baseline',
+  },
+  left: {
+    padding: '0 0 0 60px',
+  },
+  right: {
+    padding: '0 60px 0 0',
+  },
+  opti: {
+    letterSpacing: '1px',
+    fontFamily: 'OPTI',
+    fontSize: '0.8rem',
+    color: '#333333',
+  },
+  normal: {
+    margin: '10px 0',
+  },
+  midtop: {
+    marginTop: 30,
+  },
+  midbottom: {
+    marginBottom: 30,
+  },
+  producer: {
+    fontSize: '0.8rem',
   },
 }));
 
@@ -79,16 +131,14 @@ const LiveStatus = (props) => {
   });
 
   _x.utils.handles.dashboard.list.dashboard = setValues;
+  const langMap = _x.config.langsMap[_x.utils.langs.get()];
 
   return pug`
     Title(
-      Icon=TimelineIcon
-      Text='Live Status'
+      Icon='liveStatus'
+      Text=langMap[0xF000]
     )
-    Paper(
-      elevation=1
-      className=classes.paper
-    )
+    KovoBlock(className=classes.paper)
       Grid(
         container
       )
@@ -98,7 +148,9 @@ const LiveStatus = (props) => {
           xs=12
         )
           StatusOne(
-            Key="Current Block"
+            Key=langMap[0x2000]
+            className=clsx(classes.firstLine,classes.left)
+            subName=classes.opti
           )
             a(href='/block/' + values.blocks.current_block)
               =values.blocks.current_block.toLocaleString()
@@ -108,7 +160,9 @@ const LiveStatus = (props) => {
           xs=12
         )
           StatusOne(
-            Key="Total Supply of XST"
+            Key=langMap[0x2001]
+            className=clsx(classes.firstLine,classes.right)
+            subName=classes.opti
           )
             =values.xst.total_supply_of_xst.toLocaleString()
             |&nbsp;XST
@@ -123,14 +177,16 @@ const LiveStatus = (props) => {
           xs=12
         )
           StatusOne(
-            Key="Last Irreversible Block"
+            Key=langMap[0x2002]
+            className=clsx(classes.left,classes.midtop,classes.normal)
+            subName=classes.opti
           )
             a(href='/block/' + values.blocks.last_irreversible_block)
               =values.blocks.last_irreversible_block.toLocaleString()
             Typography(
               variant='h6'
               display='inline'
-              className=classes.span
+              className=classes.span1
             )
               |&nbsp;
               =values.blocks.last_irreversible_block - values.blocks.current_block
@@ -140,7 +196,9 @@ const LiveStatus = (props) => {
           xs=12
         )
           StatusOne(
-            Key="RAM In Chain"
+            Key=langMap[0x2003]
+            className=clsx(classes.right,classes.midtop,classes.normal)
+            subName=classes.opti
           )
             =(values.io.ram_in_chain/1024).toLocaleString()
             |&nbsp;KB
@@ -158,10 +216,11 @@ const LiveStatus = (props) => {
           xs=12
         )
           StatusOne(
-            Key="Current Producer"
+            Key=langMap[0x2004]
+            className=clsx(classes.left,classes.normal)
           )
             Typography(variant='h6')
-              Box
+              Box(className=classes.producer)
                 a(href='/account/' + values.producers.current_producer)
                   =values.producers.current_producer
         Grid(
@@ -170,7 +229,8 @@ const LiveStatus = (props) => {
           xs=12
         )
           StatusOne(
-            Key="Voted Total"
+            Key=langMap[0x2005]
+            className=clsx(classes.right,classes.normal)
           )
             Grid(
               container
@@ -199,10 +259,11 @@ const LiveStatus = (props) => {
           xs=12
         )
           StatusOne(
-            Key="Next Producer"
+            Key=langMap[0x2006]
+            className=clsx(classes.left,classes.midbottom,classes.normal)
           )
             Typography(variant='h6')
-              Box
+              Box(className=classes.producer)
                 a(href='/account/' + values.producers.producer_loop[values.producers.current_producer])
                   =values.producers.producer_loop[values.producers.current_producer]
         Grid(
@@ -211,7 +272,8 @@ const LiveStatus = (props) => {
           xs=12
         )
           StatusOne(
-            Key="Staked Total"
+            Key=langMap[0x2007]
+            className=clsx(classes.right,classes.midbottom,classes.normal)
           )
             Grid(
               container
@@ -222,7 +284,7 @@ const LiveStatus = (props) => {
                 item
                 xs=8
               )
-                BorderLinearProgress(
+                BorderLinearProgress1(
                   variant="determinate"
                   color="secondary"
                   value=((values.xst.staked_xst / values.xst.total_supply_of_xst) * 100)
@@ -246,7 +308,8 @@ const LiveStatus = (props) => {
           xs=12
         )
           StatusTwo(
-            Key="TPS (Live / All Time High)"
+            Key=langMap[0x2008]
+            className=clsx(classes.lastLine,classes.left)
           )
             Typography(variant='h6')
               Box
@@ -260,7 +323,8 @@ const LiveStatus = (props) => {
           xs=12
         )
           StatusTwo(
-            Key="APS (Live / All Time High)"
+            Key=langMap[0x2009]
+            className=classes.lastLine
           )
             Typography(variant='h6')
               Box
@@ -274,7 +338,8 @@ const LiveStatus = (props) => {
           xs=12
         )
           StatusTwo(
-            Key="CPU Limit (Block / Chain)"
+            Key=langMap[0x200A]
+            className=classes.lastLine
           )
             Typography(variant='h6')
               Box
@@ -290,7 +355,8 @@ const LiveStatus = (props) => {
           xs=12
         )
           StatusTwo(
-            Key="NET Limit (Block / Chain)"
+            Key=langMap[0x200B]
+            className=clsx(classes.lastLine,classes.right)
           )
             Typography(variant='h6')
               Box

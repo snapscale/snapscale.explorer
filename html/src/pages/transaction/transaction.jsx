@@ -19,7 +19,6 @@ const TransactionMain = (props) => {
       hash: props.hash,
     }), (data) => {
       try {
-        console.log(JSON.parse(data));
         setValues({ ...JSON.parse(data), ld: false });
       } catch (e) {
         setValues({ ld: false, notfound: true });

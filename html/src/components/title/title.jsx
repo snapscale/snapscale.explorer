@@ -5,16 +5,24 @@ import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles(theme => ({
+  block: {
+    padding: '0.8rem 0',
+  },
   icon: {
-    paddingLeft: '2rem',
+    paddingLeft: '0.2rem',
     marginRight: theme.spacing(2),
     color: theme.palette.secondary.contrastText,
-    fontSize: '10rem',
-    width: '10rem',
-    height: '10rem',
+    fontSize: '1rem',
+    width: '1.7rem',
+    height: '1.7rem',
   },
   text: {
-    lineHeight: '10rem',
+    lineHeight: '1rem',
+  },
+  textInner: {
+    fontWeight: 800,
+    letterSpacing: '.05rem',
+    fontSize: '1rem',
   },
 }));
 
@@ -23,12 +31,16 @@ const Title = (props) => {
   const { Icon, Text } = props;
   return pug`
     Grid(
+      className=classes.block
       container
       direction='row'
       justify='flex-start'
       alignItems='center'
     )
-      Icon(className=classes.icon)
+      img(
+        src='/src/images/'+props.Icon+'.svg'
+        className=classes.icon
+      )
       Typography(
         variant='h4'
         display='inline'
@@ -41,6 +53,7 @@ const Title = (props) => {
           Box(
             color='secondary.contrastText'
             component='span'
+            className=classes.textInner
           )
             ${Text}
   `;

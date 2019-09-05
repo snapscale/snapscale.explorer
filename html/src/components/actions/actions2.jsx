@@ -14,16 +14,17 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import IconButton from '@material-ui/core/IconButton';
-import HistoryIcon from '@material-ui/icons/History';
 
 import Title from '../title/title.jsx';
 import Loading from '../loading/loading.jsx';
+import KovoBlock from '../kovoBlock/kovoBlock.jsx';
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    margin: theme.spacing(1, 0, 3, 0),
-    color: theme.palette.secondary.contrastText,
-    backgroundColor: theme.palette.grey[200],
+    padding: 0,
+  },
+  link: {
+    color: '#766AF2',
   },
 }));
 
@@ -118,13 +119,14 @@ const Actions = (props) => {
     setRowsPerPage(parseInt(event.target.value, 10));
   }
 
+  const langMap = _x.config.langsMap[_x.utils.langs.get()];
+
   return pug`
     Title(
-      Icon=HistoryIcon
-      Text='Actions'
+      Icon='action'
+      Text=langMap[0xF006]
     )
-    Paper(
-      elevation=1
+    KovoBlock(
       className=classes.paper
     )
       if values.ld
@@ -134,14 +136,17 @@ const Actions = (props) => {
           TableHead
             TableRow
               TableCell
-                |Contract
+                =langMap[0x8000]
               TableCell
-                |Data
+                =langMap[0x8001]
           TableBody
             each item, index in rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               TableRow
                 TableCell
-                  a(href='/account/'+item.account)
+                  a(
+                    href='/account/'+item.account
+                    className=classes.link
+                  )
                     =item.action_trace.act.account
                   |:
                   =item.action_trace.act.name

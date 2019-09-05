@@ -3,21 +3,63 @@ import { lighten, makeStyles, withStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import SwapHorizIcon from '@material-ui/icons/SwapHoriz';
 import Chip from '@material-ui/core/Chip';
+import Divider from '@material-ui/core/Divider';
+import clsx from 'clsx';
 
 import Title from '../title/title.jsx';
 import Loading from '../loading/loading.jsx';
+import KovoBlock from '../kovoBlock/kovoBlock.jsx';
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    margin: theme.spacing(1, 0, 3, 0),
-    color: theme.palette.secondary.contrastText,
-    backgroundColor: theme.palette.grey[200],
-    padding: theme.spacing(2),
+    padding: 0,
   },
   item: {
     padding: theme.spacing(1, 0),
+  },
+  firstLine: {
+    height: 80,
+  },
+  left: {
+    padding: '0 0 0 60px',
+  },
+  right: {
+    padding: '0 60px 0 0',
+  },
+  normal: {
+    margin: '10px 0',
+  },
+  midtop: {
+    marginTop: 30,
+  },
+  midbottom: {
+    marginBottom: 30,
+  },
+  headBlock: {
+    alignItems: 'center',
+    alignContent: 'center',
+    display: 'flex',
+  },
+  title: {
+    fontSize: '0.8rem',
+    color: '#333333',
+  },
+  info: {
+    color: '#333333',
+    fontSize: '0.7rem',
+    fontWeight: 800,
+  },
+  labelSmall: {
+    color: '#FFFFFF',
+  },
+  chipA: {
+    padding: '0.7rem',
+    backgroundColor: '#0CB5E5',
+  },
+  chipB: {
+    padding: '0.7rem',
+    backgroundColor: '#382AC7',
   },
 }));
 
@@ -26,13 +68,14 @@ const TransactionDetails = (props) => {
 
   const { values } = props;
 
+  const langMap = _x.config.langsMap[_x.utils.langs.get()];
+
   return pug`
     Title(
-      Icon=SwapHorizIcon
-      Text='Transaction Details'
+      Icon='transaction'
+      Text=langMap[0xF005]
     )
-    Paper(
-      elevation=1
+    KovoBlock(
       className=classes.paper
     )
       if values.ld
@@ -44,6 +87,7 @@ const TransactionDetails = (props) => {
           Grid(
             item
             xs=12
+            className=clsx(classes.left,classes.firstLine,classes.headBlock)
           )
             Grid(
               container
@@ -54,14 +98,25 @@ const TransactionDetails = (props) => {
                 item
                 xs=2
               )
-                Typography(variant='h5')
-                  |Transaction Hash
+                Typography(
+                  variant='h5'
+                  className=classes.title
+                )
+                  =langMap[0x7000]
               Grid(
                 item
                 xs=10
               )
-                Typography(variant='h5')
+                Typography(
+                  variant='h5'
+                  className=classes.info
+                )
                   =values.trx.trx_id
+          Grid(
+            item
+            xs=12
+          )
+            Divider(className=classes.divider)
           Grid(
             item
             md=6
@@ -70,14 +125,17 @@ const TransactionDetails = (props) => {
             Grid(
               container
               alignItems='baseline'
-              className=classes.item
+              className=clsx(classes.normal,classes.item,classes.midtop,classes.left)
             )
               Grid(
                 item
                 xs=4
               )
-                Typography(variant='h5')
-                  |Status
+                Typography(
+                  variant='h5'
+                  className=classes.title
+                )
+                  =langMap[0x7001]
               Grid(
                 item
                 xs=8
@@ -87,6 +145,10 @@ const TransactionDetails = (props) => {
                     color="primary"
                     label=values.trace.receipt.status.toUpperCase()
                     size="small"
+                    classes={
+                      root:classes.chipA,
+                      labelSmall:classes.labelSmall
+                    }
                   )
                   |&nbsp;
                   if values.trx.irreversible
@@ -94,6 +156,10 @@ const TransactionDetails = (props) => {
                       color="primary"
                       label="IRREVERSIBLE"
                       size="small"
+                      classes={
+                        root:classes.chipB,
+                        labelSmall:classes.labelSmall
+                      }
                     )
           Grid(
             item
@@ -103,19 +169,25 @@ const TransactionDetails = (props) => {
             Grid(
               container
               alignItems='baseline'
-              className=classes.item
+              className=clsx(classes.normal,classes.item,classes.midtop,classes.right)
             )
               Grid(
                 item
                 xs=4
               )
-                Typography(variant='h5')
-                  |CPU Usage
+                Typography(
+                  variant='h5'
+                  className=classes.title
+                )
+                  =langMap[0x7004]
               Grid(
                 item
                 xs=8
               )
-                Typography(variant='h5')
+                Typography(
+                  variant='h5'
+                  className=classes.info
+                )
                   if values.trace.receipt.cpu_usage_us > (1000*1000)
                     =Math.floor(values.trace.receipt.cpu_usage_us / 1000 / 1000) + ' s '
                   if values.trace.receipt.cpu_usage_us > 1000
@@ -129,19 +201,25 @@ const TransactionDetails = (props) => {
             Grid(
               container
               alignItems='baseline'
-              className=classes.item
+              className=clsx(classes.normal,classes.item,classes.left)
             )
               Grid(
                 item
                 xs=4
               )
-                Typography(variant='h5')
-                  |Block Number
+                Typography(
+                  variant='h5'
+                  className=classes.title
+                )
+                  =langMap[0x7002]
               Grid(
                 item
                 xs=8
               )
-                Typography(variant='h5')
+                Typography(
+                  variant='h5'
+                  className=classes.info
+                )
                   a(href='/block/'+values.trace.block_num)
                     =values.trace.block_num.toLocaleString()
           Grid(
@@ -152,19 +230,25 @@ const TransactionDetails = (props) => {
             Grid(
               container
               alignItems='baseline'
-              className=classes.item
+              className=clsx(classes.normal,classes.item,classes.right)
             )
               Grid(
                 item
                 xs=4
               )
-                Typography(variant='h5')
-                  |NET Usage
+                Typography(
+                  variant='h5'
+                  className=classes.title
+                )
+                  =langMap[0x7005]
               Grid(
                 item
                 xs=8
               )
-                Typography(variant='h5')
+                Typography(
+                  variant='h5'
+                  className=classes.info
+                )
                   =values.trace.receipt.net_usage_words
                   |&nbsp;
                   |B
@@ -176,19 +260,25 @@ const TransactionDetails = (props) => {
             Grid(
               container
               alignItems='baseline'
-              className=classes.item
+              className=clsx(classes.normal,classes.item,classes.midbottom,classes.left)
             )
               Grid(
                 item
                 xs=4
               )
-                Typography(variant='h5')
-                  |Block Time
+                Typography(
+                  variant='h5' 
+                  className=classes.title
+                )
+                  =langMap[0x7003]
               Grid(
                 item
                 xs=8
               )
-                Typography(variant='h5')
+                Typography(
+                  variant='h5'
+                  className=classes.info
+                )
                   =new Date(values.trace.block_time).toLocaleString()
           Grid(
             item
@@ -198,19 +288,25 @@ const TransactionDetails = (props) => {
             Grid(
               container
               alignItems='baseline'
-              className=classes.item
+              className=clsx(classes.normal,classes.item,classes.midbottom,classes.bottom)
             )
               Grid(
                 item
                 xs=4
               )
-                Typography(variant='h5')
-                  |Expiration Time
+                Typography(
+                  variant='h5'
+                  className=classes.title
+                )
+                  =langMap[0x7006]
               Grid(
                 item
                 xs=8
               )
-                Typography(variant='h5')
+                Typography(
+                  variant='h5'
+                  className=classes.info
+                )
                   =new Date(values.trx.expiration).toLocaleString()
   `;
 };

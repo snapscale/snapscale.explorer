@@ -10,22 +10,28 @@ import Hidden from '@material-ui/core/Hidden';
 
 const useStyles = makeStyles(theme => ({
   header: {
-    paddingTop: theme.spacing(2),
-    marginBottom: theme.spacing(2),
+    paddingTop: theme.spacing(4),
+    marginBottom: theme.spacing(4),
   },
   formControl: {
     marginLeft: theme.spacing(2),
     minWidth: 100,
   },
   input: {
-    fontSize: '7rem',
-    padding: '2rem 4rem',
-    backgroundColor: theme.palette.grey[200],
-    borderRadius: 4,
+    fontSize: '0.7rem',
+    padding: '0.2rem 0.4rem',
+    backgroundColor: '#FFFFFF',
+    borderRadius: 5,
     lineHeight: 1.6,
+    color: '#666666',
+  },
+  select: {
+    '&:focus': {
+      borderRadius: 5,
+    },
   },
   icon: {
-    fontSize: '10rem',
+    fontSize: '1rem',
     height: '100%',
     top: 0,
   },
@@ -36,7 +42,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   li: {
-    fontSize: '7rem',
+    fontSize: '0.7rem',
   },
 }));
 
@@ -75,7 +81,7 @@ const HeaderMain = (props) => {
                     classes={input:classes.input}
                   )
                 `}
-                classes={icon:classes.icon}
+                classes={icon:classes.icon,select:classes.select}
                 MenuProps={
                   elevation:2
                 }
@@ -96,7 +102,7 @@ const HeaderMain = (props) => {
                     classes={input:classes.input}
                   )
                 `}
-                classes={icon:classes.icon}
+                classes={icon:classes.icon,select:classes.select}
                 MenuProps={
                   elevation:2
                 }

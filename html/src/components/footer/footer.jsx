@@ -10,7 +10,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2, 0),
   },
   box: {
-    paddingLeft: '2rem',
+    paddingLeft: '0.2rem',
   },
 }));
 
@@ -20,7 +20,7 @@ const FooterMain = (props) => {
     Grid(
       container
       direction='row'
-      justify='space-between'
+      justify='flex-end'
       alignItems='center'
       className=classes.root
     )

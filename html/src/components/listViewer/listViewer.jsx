@@ -9,17 +9,19 @@ import AllInclusiveIcon from '@material-ui/icons/AllInclusive';
 
 import loadable from '../../utils/loadable.jsx';
 import Title from '../title/title.jsx';
+import KovoBlock from '../kovoBlock/kovoBlock.jsx';
 
 const Producers = loadable(() => import('./producers.jsx'));
 const Transactions = loadable(() => import('./transactions.jsx'));
 
 const useStyles = makeStyles(theme => ({
   main: {
-    margin: theme.spacing(1, 0, 2, 0),
+    margin: theme.spacing(0),
+    padding: theme.spacing(0),
   },
   paper: {
-    color: theme.palette.secondary.contrastText,
-    backgroundColor: theme.palette.grey[200],
+    color: '#999999',
+    backgroundColor: '#FFFFFF',
     padding: theme.spacing(0),
     borderBottomLeftRadius: '0',
     borderBottomRightRadius: '0',
@@ -27,7 +29,7 @@ const useStyles = makeStyles(theme => ({
   },
   paper2: {
     color: theme.palette.secondary.contrastText,
-    backgroundColor: theme.palette.grey[100],
+    backgroundColor: '#FFFFFF',
     padding: theme.spacing(0),
     borderTopLeftRadius: '0',
     borderTopRightRadius: '0',
@@ -35,21 +37,23 @@ const useStyles = makeStyles(theme => ({
     overflowX: 'auto',
   },
   tab: {
-    backgroundColor: theme.palette.grey[300],
+    color: '#382AC7',
+  },
+  root: {
+    borderBottom: '.5px solid #C7C7C7',
+  },
+  indicator: {
+    height: '0.2rem',
   },
   wrapper: {
     flexDirection: 'row',
-    fontSize: '7rem',
-    fontWeight: 300,
-    paddingBottom: '2rem',
-    '& :first-child': {
-      fontSize: '8rem',
-      marginBottom: '0 !important',
-      marginRight: theme.spacing(1),
-    },
+    fontSize: '0.8rem',
+    fontWeight: 800,
+    minWidth: '12rem',
   },
   tabRoot: {
     textTransform: 'none',
+    minHeight: '4.5rem',
   },
 }));
 
@@ -98,13 +102,14 @@ const ListViewer = (props) => {
     setRows2(rows2.slice(-250));
   };
 
+  const langMap = _x.config.langsMap[_x.utils.langs.get()];
+
   return pug`
     Title(
-      Icon=ReorderIcon
-      Text='Infomation'
+      Icon='information'
+      Text=langMap[0xF002]
     )
-    Paper(
-      elevation=1
+    KovoBlock(
       className=classes.main
     )
       Paper(
@@ -114,10 +119,13 @@ const ListViewer = (props) => {
         Tabs(
           value=value
           onChange=handleChange
+          classes={
+            root:classes.root,
+            indicator:classes.indicator
+          }
         )
           Tab(
-            icon=${pug`DnsIcon`}
-            label='Block Producers'
+            label=langMap[0x4000]
             disableFocusRipple
             classes={
               selected:classes.tab,
@@ -126,8 +134,7 @@ const ListViewer = (props) => {
             }
           )
           Tab(
-            icon=${pug`AllInclusiveIcon`}
-            label='Latest Transactions'
+            label=langMap[0x4001]
             disableFocusRipple
             classes={
               selected:classes.tab,

@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import LockIcon from '@material-ui/icons/Lock';
 import Grid from '@material-ui/core/Grid';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
@@ -11,15 +10,16 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import Title from '../title/title.jsx';
 import Loading from '../loading/loading.jsx';
+import KovoBlock from '../kovoBlock/kovoBlock.jsx';
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    margin: theme.spacing(1, 0, 3, 0),
+    padding: 0,
   },
   root: {
     color: theme.palette.secondary.contrastText,
-    backgroundColor: theme.palette.grey[200],
-    borderRadius: '1rem !important',
+    // backgroundColor: theme.palette.grey[200],
+    borderRadius: '0.1rem !important',
   },
   detail: {
     flexDirection: 'column',
@@ -33,23 +33,25 @@ const Keys = (props) => {
   const classes = useStyles();
   const { values } = props;
 
+  const langMap = _x.config.langsMap[_x.utils.langs.get()];
+
   return pug`
     Title(
-      Icon=LockIcon
-      Text='Permissions & Keys'
+      Icon='permission'
+      Text=langMap[0xF008]
     )
-    div(className=classes.paper)
+    KovoBlock(className=classes.paper)
       ExpansionPanel(classes={root:classes.root})
         ExpansionPanelSummary(expandIcon=${pug`ExpandMoreIcon`})
           if values.ld
             Loading
           else
             Typography(variant='h5')
-              |VIEW
+              =langMap[0xA000]
               |&nbsp;
               =values.info.permissions.length
               |&nbsp;
-              |PERMISSIONS
+              =langMap[0xA001]
         ExpansionPanelDetails(classes={root:classes.detail})
           if !values.ld
             each item, index in values.info.permissions

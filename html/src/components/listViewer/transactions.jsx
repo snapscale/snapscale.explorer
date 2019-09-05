@@ -24,7 +24,7 @@ const useStyles1 = makeStyles(theme => ({
     border: 0,
   },
   tableSm: {
-    width: '50rem',
+    width: '5rem',
   },
 }));
 
@@ -103,20 +103,22 @@ const Transactions = (props) => {
     setRowsPerPage(parseInt(event.target.value, 10));
   }
 
+  const langMap = _x.config.langsMap[_x.utils.langs.get()];
+
   return pug`
     Table
       TableHead
         TableRow
           TableCell(className=classes.tableSm)
-            |Block Height
+            =langMap[0x4200]
           TableCell(className=classes.tableSm)
-            |Transaction Id
+            =langMap[0x4201]
           TableCell(className=classes.tableSm)
-            |Account & contract
+            =langMap[0x4202]
           TableCell(className=classes.tableSm)
-            |Timestamp
+            =langMap[0x4203]
           TableCell
-            |Info
+            =langMap[0x4204]
       TableBody
         each item, index in rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
           TableRow
@@ -151,7 +153,6 @@ const Transactions = (props) => {
             rowsPerPage=rowsPerPage
             page=page
             SelectProps={
-              inputProps: { 'aria-label': 'Rows per page' },
               native: true,
             }
             onChangePage=handleChangePage

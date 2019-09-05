@@ -8,26 +8,27 @@ import echarts from 'echarts';
 import './world.js';
 import Title from '../title/title.jsx';
 import Loading from '../loading/loading.jsx';
+import KovoBlock from '../kovoBlock/kovoBlock.jsx';
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    margin: theme.spacing(1, 0, 3, 0),
+    margin: theme.spacing(0, 0, 2, 0),
     backgroundColor: 'transparent',
   },
   paperInner: {
-    color: theme.palette.secondary.contrastText,
-    backgroundColor: theme.palette.grey[200],
     padding: theme.spacing(2),
+    marginBottom: 0,
   },
 }));
 
 const ChartsMain = (props) => {
   const classes = useStyles();
+  const langMap = _x.config.langsMap[_x.utils.langs.get()];
 
   return pug`
     Title(
-      Icon=InsertChartOutlinedIcon
-      Text='Charts'
+      Icon='charts'
+      Text=langMap[0xF001]
     )
     Paper(
       elevation=0
@@ -43,66 +44,50 @@ const ChartsMain = (props) => {
             md=6
             xs=12
           )
-            Paper(
-              elevation=1
-              className=classes.paperInner
-            )
+            KovoBlock#123(className=classes.paperInner)
               #chart1.chart
           Grid(
             item
             md=6
             xs=12
           )
-            Paper(
-              elevation=1
-              className=classes.paperInner
-            )
+            KovoBlock(className=classes.paperInner)
               #chart2.chart
           Grid(
             item
             md=6
             xs=12
           )
-            Paper(
-              elevation=1
-              className=classes.paperInner
-            )
+            KovoBlock(className=classes.paperInner)
               #chart3.chart
           Grid(
             item
             md=6
             xs=12
           )
-            Paper(
-              elevation=1
-              className=classes.paperInner
-            )
+            KovoBlock(className=classes.paperInner)
               #chart4.chart
           Grid(
             item
             md=6
             xs=12
           )
-            Paper(
-              elevation=1
-              className=classes.paperInner
-            )
+            KovoBlock(className=classes.paperInner)
               #chart5.chart
           Grid(
             item
             md=6
             xs=12
           )
-            Paper(
-              elevation=1
-              className=classes.paperInner
-            )
+            KovoBlock(className=classes.paperInner)
               #chart6.chart
   `;
 };
 
 class Charts extends React.Component {
   componentDidMount() {
+    const langMap = _x.config.langsMap[_x.utils.langs.get()];
+
     const Chart1 = echarts.init(document.getElementById('chart1'));
 
     let tps = [];
@@ -111,10 +96,10 @@ class Charts extends React.Component {
     const option = {
       backgroundColor: 'transparent',
       title: {
-        text: 'TPS / APS',
+        text: langMap[0x3000],
         left: 'center',
         textStyle: {
-          color: '#0c0c0c',
+          color: '#333333',
           fontSize: 16,
         },
       },
@@ -124,19 +109,22 @@ class Charts extends React.Component {
       },
       legend: {
         itemGap: 20,
+        itemWidth: 16,
+        itemHeight: 16,
         data: [{
           name: 'TPS',
           icon: 'roundRect',
           textStyle: {
-            color: '#0c0c0c',
+            color: '#333333',
           },
         }, {
           name: 'APS',
           icon: 'roundRect',
           textStyle: {
-            color: '#0c0c0c',
+            color: '#333333',
           },
         }],
+        right: 0,
         bottom: 0,
       },
       grid: {
@@ -161,13 +149,13 @@ class Charts extends React.Component {
           show: true,
           length: 25,
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
           },
         },
         splitLine: {
           show: true,
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
           },
         },
       },
@@ -182,18 +170,18 @@ class Charts extends React.Component {
           show: true,
           length: 15,
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
           },
         },
         splitLine: {
           show: true,
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
           },
         },
         axisLine: {
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
             width: 1,
           },
         },
@@ -201,17 +189,17 @@ class Charts extends React.Component {
       series: [{
         name: 'TPS',
         type: 'line',
-        smooth: true,
+        smooth: 0.5,
         showAllSymbol: true,
         symbol: 'circle',
-        symbolSize: 6,
+        symbolSize: 0,
         lineStyle: {
           normal: {
-            color: '#6EA6E8', // 线条颜色
+            color: '#92E7FF', // 线条颜色
           },
         },
         itemStyle: {
-          color: '#6EA6E8',
+          color: '#92E7FF',
           borderColor: '#fff',
           borderWidth: 0,
         },
@@ -219,11 +207,11 @@ class Charts extends React.Component {
           normal: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
               offset: 0,
-              color: '#6EA6E8AA',
+              color: '#0CB5E533',
             },
             {
               offset: 1,
-              color: '#6EA6E800',
+              color: '#0CB5E500',
             },
             ], false),
           },
@@ -232,17 +220,17 @@ class Charts extends React.Component {
       }, {
         name: 'APS',
         type: 'line',
-        smooth: true,
+        smooth: 0.5,
         showAllSymbol: true,
         symbol: 'circle',
-        symbolSize: 6,
+        symbolSize: 0,
         lineStyle: {
           normal: {
-            color: '#F29C9C',
+            color: '#F6587A',
           },
         },
         itemStyle: {
-          color: '#F29C9C',
+          color: '#F6587A',
           borderColor: '#fff',
           borderWidth: 0,
         },
@@ -250,11 +238,11 @@ class Charts extends React.Component {
           normal: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
               offset: 0,
-              color: '#F29C9CAA',
+              color: '#F6587A33',
             },
             {
               offset: 1,
-              color: '#F29C9C00',
+              color: '#F6587A00',
             },
             ], false),
           },
@@ -288,10 +276,10 @@ class Charts extends React.Component {
     const option2 = {
       backgroundColor: 'transparent',
       title: {
-        text: 'Producer Map',
+        text: langMap[0x3001],
         left: 'center',
         textStyle: {
-          color: '#0c0c0c',
+          color: '#333333',
           fontSize: 16,
         },
       },
@@ -361,7 +349,7 @@ class Charts extends React.Component {
         itemStyle: {
           normal: {
             show: false,
-            color: '#6EA6E8',
+            color: '#382AC7',
           },
         },
         data: [{
@@ -375,7 +363,7 @@ class Charts extends React.Component {
         symbolSize: 8,
         itemStyle: {
           normal: {
-            color: '#F29C9C',
+            color: '#F6587A',
           },
         },
         zlevel: 1,
@@ -411,7 +399,7 @@ class Charts extends React.Component {
     const option3 = {
       backgroundColor: 'transparent',
       title: {
-        text: 'Transform Amount Per Day',
+        text: langMap[0x3002],
         left: 'center',
         textStyle: {
           color: '#0c0c0c',
@@ -444,13 +432,13 @@ class Charts extends React.Component {
           show: true,
           length: 25,
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
           },
         },
         splitLine: {
           show: true,
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
           },
         },
       },
@@ -465,36 +453,36 @@ class Charts extends React.Component {
           show: true,
           length: 15,
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
           },
         },
         splitLine: {
           show: true,
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
           },
         },
         axisLine: {
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
             width: 1,
           },
         },
       }],
       series: [{
-        name: 'Transform Amount Per Day',
+        name: langMap[0x3002],
         type: 'line',
-        smooth: true,
+        smooth: 0.5,
         showAllSymbol: true,
         symbol: 'circle',
-        symbolSize: 6,
+        symbolSize: 0,
         lineStyle: {
           normal: {
-            color: '#6EA6E8', // 线条颜色
+            color: '#92E7FF', // 线条颜色
           },
         },
         itemStyle: {
-          color: '#6EA6E8',
+          color: '#92E7FF',
           borderColor: '#fff',
           borderWidth: 0,
         },
@@ -502,11 +490,11 @@ class Charts extends React.Component {
           normal: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
               offset: 0,
-              color: '#6EA6E8AA',
+              color: '#0CB5E533',
             },
             {
               offset: 1,
-              color: '#6EA6E800',
+              color: '#0CB5E500',
             },
             ], false),
           },
@@ -521,10 +509,10 @@ class Charts extends React.Component {
     const option4 = {
       backgroundColor: 'transparent',
       title: {
-        text: 'Transactions Per Day',
+        text: langMap[0x3003],
         left: 'center',
         textStyle: {
-          color: '#0c0c0c',
+          color: '#333333',
           fontSize: 16,
         },
       },
@@ -554,13 +542,13 @@ class Charts extends React.Component {
           show: true,
           length: 25,
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
           },
         },
         splitLine: {
           show: true,
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
           },
         },
       },
@@ -575,36 +563,36 @@ class Charts extends React.Component {
           show: true,
           length: 15,
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
           },
         },
         splitLine: {
           show: true,
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
           },
         },
         axisLine: {
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
             width: 1,
           },
         },
       }],
       series: [{
-        name: 'Transactions Per Day',
+        name: langMap[0x3003],
         type: 'line',
-        smooth: true,
+        smooth: 0.5,
         showAllSymbol: true,
         symbol: 'circle',
-        symbolSize: 6,
+        symbolSize: 0,
         lineStyle: {
           normal: {
-            color: '#6EA6E8', // 线条颜色
+            color: '#92E7FF', // 线条颜色
           },
         },
         itemStyle: {
-          color: '#6EA6E8',
+          color: '#92E7FF',
           borderColor: '#fff',
           borderWidth: 0,
         },
@@ -612,11 +600,11 @@ class Charts extends React.Component {
           normal: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
               offset: 0,
-              color: '#6EA6E8AA',
+              color: '#0CB5E533',
             },
             {
               offset: 1,
-              color: '#6EA6E800',
+              color: '#0CB5E500',
             },
             ], false),
           },
@@ -631,10 +619,10 @@ class Charts extends React.Component {
     const option5 = {
       backgroundColor: 'transparent',
       title: {
-        text: 'Number of Accounts',
+        text: langMap[0x3004],
         left: 'center',
         textStyle: {
-          color: '#0c0c0c',
+          color: '#333333',
           fontSize: 16,
         },
       },
@@ -664,13 +652,13 @@ class Charts extends React.Component {
           show: true,
           length: 25,
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
           },
         },
         splitLine: {
           show: true,
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
           },
         },
       },
@@ -685,36 +673,36 @@ class Charts extends React.Component {
           show: true,
           length: 15,
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
           },
         },
         splitLine: {
           show: true,
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
           },
         },
         axisLine: {
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
             width: 1,
           },
         },
       }],
       series: [{
-        name: 'Number of Accounts',
+        name: langMap[0x3004],
         type: 'line',
-        smooth: true,
+        smooth: 0.5,
         showAllSymbol: true,
         symbol: 'circle',
-        symbolSize: 6,
+        symbolSize: 0,
         lineStyle: {
           normal: {
-            color: '#6EA6E8', // 线条颜色
+            color: '#92E7FF', // 线条颜色
           },
         },
         itemStyle: {
-          color: '#6EA6E8',
+          color: '#92E7FF',
           borderColor: '#fff',
           borderWidth: 0,
         },
@@ -722,11 +710,11 @@ class Charts extends React.Component {
           normal: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
               offset: 0,
-              color: '#6EA6E8AA',
+              color: '#0CB5E533',
             },
             {
               offset: 1,
-              color: '#6EA6E800',
+              color: '#0CB5E500',
             },
             ], false),
           },
@@ -742,10 +730,10 @@ class Charts extends React.Component {
     const option6 = {
       backgroundColor: 'transparent',
       title: {
-        text: 'Number of Contracts',
+        text: langMap[0x3005],
         left: 'center',
         textStyle: {
-          color: '#0c0c0c',
+          color: '#333333',
           fontSize: 16,
         },
       },
@@ -775,13 +763,13 @@ class Charts extends React.Component {
           show: true,
           length: 25,
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
           },
         },
         splitLine: {
           show: true,
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
           },
         },
       },
@@ -796,36 +784,36 @@ class Charts extends React.Component {
           show: true,
           length: 15,
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
           },
         },
         splitLine: {
           show: true,
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
           },
         },
         axisLine: {
           lineStyle: {
-            color: '#dcdcdc',
+            color: 'rgba(209,209,209,0.5)',
             width: 1,
           },
         },
       }],
       series: [{
-        name: 'Number of Contracts',
+        name: langMap[0x3005],
         type: 'line',
-        smooth: true,
+        smooth: 0.5,
         showAllSymbol: true,
         symbol: 'circle',
-        symbolSize: 6,
+        symbolSize: 0,
         lineStyle: {
           normal: {
-            color: '#6EA6E8', // 线条颜色
+            color: '#92E7FF', // 线条颜色
           },
         },
         itemStyle: {
-          color: '#6EA6E8',
+          color: '#92E7FF',
           borderColor: '#fff',
           borderWidth: 0,
         },
@@ -833,11 +821,11 @@ class Charts extends React.Component {
           normal: {
             color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
               offset: 0,
-              color: '#6EA6E8AA',
+              color: '#0CB5E533',
             },
             {
               offset: 1,
-              color: '#6EA6E800',
+              color: '#0CB5E500',
             },
             ], false),
           },

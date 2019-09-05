@@ -1,22 +1,64 @@
 import React from 'react';
-import { lighten, makeStyles, withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import InboxIcon from '@material-ui/icons/Inbox';
+import Divider from '@material-ui/core/Divider';
+import clsx from 'clsx';
 
 import Title from '../title/title.jsx';
 import Loading from '../loading/loading.jsx';
+import KovoBlock from '../kovoBlock/kovoBlock.jsx';
 
 const useStyles = makeStyles(theme => ({
   paper: {
-    margin: theme.spacing(1, 0, 3, 0),
-    color: theme.palette.secondary.contrastText,
-    backgroundColor: theme.palette.grey[200],
-    padding: theme.spacing(2),
+    padding: 0,
   },
   item: {
     padding: theme.spacing(1, 0),
+  },
+  divider: {
+    height: 1,
+  },
+  firstLine: {
+    height: 80,
+  },
+  left: {
+    padding: '0 0 0 60px',
+  },
+  right: {
+    padding: '0 60px 0 0',
+  },
+  normal: {
+    margin: '10px 0',
+  },
+  midtop: {
+    marginTop: 30,
+  },
+  midbottom: {
+    marginBottom: 30,
+  },
+  title: {
+    fontSize: '0.8rem',
+    color: '#333333',
+  },
+  info: {
+    color: '#333333',
+    fontSize: '0.7rem',
+    fontWeight: 800,
+  },
+  x: {
+    color: '#382AC7',
+    fontFamily: 'OPTI',
+    fontSize: '1rem',
+  },
+  headBlock: {
+    alignItems: 'center',
+    alignContent: 'center',
+    display: 'flex',
+  },
+  spec: {
+    paddingRight: 60,
   },
 }));
 
@@ -35,13 +77,14 @@ const BlockDetails = (props) => {
     });
   }
 
+  const langMap = _x.config.langsMap[_x.utils.langs.get()];
+
   return pug`
     Title(
-      Icon=InboxIcon
-      Text='Block Details'
+      Icon='blockDetail'
+      Text=langMap[0xF003]
     )
-    Paper(
-      elevation=1
+    KovoBlock(
       className=classes.paper
     )
       if values.ld
@@ -54,6 +97,7 @@ const BlockDetails = (props) => {
             item
             md=6
             xs=12
+            className=clsx(classes.firstLine,classes.left,classes.headBlock)
           )
             Grid(
               container
@@ -64,13 +108,19 @@ const BlockDetails = (props) => {
                 item
                 xs=4
               )
-                Typography(variant='h4')
-                  |Block Number
+                Typography(
+                  variant='h4'
+                  className=classes.title
+                )
+                  =langMap[0x5000]
               Grid(
                 item
                 xs=8
               )
-                Typography(variant='h3')
+                Typography(
+                  variant='h3'
+                  className=classes.x
+                )
                   =values.block_num.toLocaleString()
           Grid(
             item
@@ -79,8 +129,14 @@ const BlockDetails = (props) => {
           )
           Grid(
             item
+            xs=12
+          )
+            Divider(className=classes.divider)
+          Grid(
+            item
             md=6
             xs=12
+            className=clsx(classes.left,classes.midtop,classes.normal)
           )
             Grid(
               container
@@ -91,19 +147,26 @@ const BlockDetails = (props) => {
                 item
                 xs=4
               )
-                Typography(variant='h5')
-                  |Producer
+                Typography(
+                  variant='h5'
+                  className=classes.title
+                )
+                  =langMap[0x5001]
               Grid(
                 item
                 xs=8
               )
-                Typography(variant='h5')
+                Typography(
+                  variant='h5'
+                  className=classes.info
+                )
                   a(href='/account/'+values.producer)
                     =values.producer
           Grid(
             item
             md=6
             xs=12
+            className=clsx(classes.midtop,classes.normal)
           )
             Grid(
               container
@@ -114,13 +177,19 @@ const BlockDetails = (props) => {
                 item
                 xs=4
               )
-                Typography(variant='h5')
-                  |Total CPU Usage
+                Typography(
+                  variant='h5'
+                  className=classes.title
+                )
+                  =langMap[0x5004]
               Grid(
                 item
                 xs=8
               )
-                Typography(variant='h5')
+                Typography(
+                  variant='h5'
+                  className=classes.info
+                )
                   if sumCpu > (1000*1000)
                     =Math.floor(sumCpu / 1000 / 1000) + ' s '
                   if sumCpu > 1000
@@ -130,6 +199,7 @@ const BlockDetails = (props) => {
             item
             md=6
             xs=12
+            className=clsx(classes.left,classes.normal)
           )
             Grid(
               container
@@ -140,18 +210,25 @@ const BlockDetails = (props) => {
                 item
                 xs=4
               )
-                Typography(variant='h5')
-                  |Timestamp
+                Typography(
+                  variant='h5'
+                  className=classes.title
+                )
+                  =langMap[0x5002]
               Grid(
                 item
                 xs=8
               )
-                Typography(variant='h5')
+                Typography(
+                  variant='h5'
+                  className=classes.info
+                )
                   =new Date(values.timestamp).toLocaleString()
           Grid(
             item
             md=6
             xs=12
+            className=clsx(classes.normal)
           )
             Grid(
               container
@@ -162,19 +239,26 @@ const BlockDetails = (props) => {
                 item
                 xs=4
               )
-                Typography(variant='h5')
-                  |Total NET Usage
+                Typography(
+                  variant='h5'
+                  className=classes.title
+                )
+                  =langMap[0x5005]
               Grid(
                 item
                 xs=8
               )
-                Typography(variant='h5')
+                Typography(
+                  variant='h5'
+                  className=classes.info
+                )
                   =sumNet
                   |&nbsp;
                   |B
           Grid(
             item
             xs=12
+            className=clsx(classes.left,classes.midbottom,classes.normal,classes.spec)
           )
             Grid(
               container
@@ -186,14 +270,20 @@ const BlockDetails = (props) => {
                 md=2
                 xs=4
               )
-                Typography(variant='h5')
-                  |Block ID
+                Typography(
+                  variant='h5'
+                  className=classes.title
+                )
+                  =langMap[0x5003]
               Grid(
                 item
                 md=10
                 xs=8
               )
-                Typography(variant='h5')
+                Typography(
+                  variant='h5'
+                  className=classes.info
+                )
                   =values.id
   `;
 };
