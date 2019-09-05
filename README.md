@@ -20,7 +20,7 @@
 
 ## Design Standard
 - unit base  
-  1rem = 2px  
+  1rem = 20px  
 
 - font-size  
-  7rem+
+  0.7rem+
