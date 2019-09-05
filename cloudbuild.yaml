@@ -1,0 +1,12 @@
+steps:
+  - id: docker build
+    name: gcr.io/cloud-builders/docker
+    args: ['build', '-t', 'asia.gcr.io/$PROJECT_ID/snapscale-explorer-new:$COMMIT_SHA', '-t', 'asia.gcr.io/$PROJECT_ID/snapscale-explorer-new:latest', '.']
+
+  - id: docker push 
+    name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'asia.gcr.io/$PROJECT_ID/snapscale-explorer-new:$COMMIT_SHA']
+  
+  - id: docker push latest
+    name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'asia.gcr.io/$PROJECT_ID/snapscale-explorer-new:latest']
