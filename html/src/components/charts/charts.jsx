@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { makeStyles, formatMs } from '@material-ui/core/styles';
 import InsertChartOutlinedIcon from '@material-ui/icons/InsertChartOutlined';
 import Paper from '@material-ui/core/Paper';
@@ -396,6 +397,7 @@ class Charts extends React.Component {
     };
 
     const Chart3 = echarts.init(document.getElementById('chart3'));
+    const { values } = this.props;
     const option3 = {
       backgroundColor: 'transparent',
       title: {
@@ -499,7 +501,7 @@ class Charts extends React.Component {
             ], false),
           },
         },
-        data: [100, 100.75, 105.33, 99.88, 89.98, 102.02, 111.33, 105.23, 99.87, 99.99],
+        data: values.dt1,
       }],
     };
 
@@ -609,7 +611,7 @@ class Charts extends React.Component {
             ], false),
           },
         },
-        data: [10000, 12075, 11533, 9988, 8998, 10202, 14133, 15523, 9987, 8899],
+        data: values.dt2,
       }],
     };
 
@@ -719,7 +721,7 @@ class Charts extends React.Component {
             ], false),
           },
         },
-        data: [10000, 10075, 11003, 11155, 11212, 11255, 12301, 12499, 12511, 12600],
+        data: values.dt3,
       }],
     };
 
@@ -830,11 +832,40 @@ class Charts extends React.Component {
             ], false),
           },
         },
-        data: [400, 415, 425, 450, 477, 533, 550, 600, 612, 666],
+        data: values.dt4,
       }],
     };
 
     Chart6.setOption(option6);
+
+    _x.charts = {};
+    _x.charts.update = (valuesx) => {
+      Chart3.setOption({
+        series: [{
+          data: valuesx.dt1,
+        }],
+      });
+      Chart4.setOption({
+        series: [{
+          data: valuesx.dt2,
+        }],
+      });
+      Chart5.setOption({
+        series: [{
+          data: valuesx.dt3,
+        }],
+      });
+      Chart6.setOption({
+        series: [{
+          data: valuesx.dt4,
+        }],
+      });
+    };
+  }
+
+  componentDidUpdate() {
+    const { values } = this.props;
+    _x.charts.update(values);
   }
 
   render() {
@@ -843,5 +874,23 @@ class Charts extends React.Component {
     `;
   }
 }
+
+Charts.propTypes = {
+  values: PropTypes.shape({
+    dt1: PropTypes.arrayOf(PropTypes.string),
+    dt2: PropTypes.arrayOf(PropTypes.number),
+    dt3: PropTypes.arrayOf(PropTypes.number),
+    dt4: PropTypes.arrayOf(PropTypes.number),
+  }),
+};
+
+Charts.defaultProps = {
+  values: {
+    dt1: [],
+    dt2: [],
+    dt3: [],
+    dt4: [],
+  },
+};
 
 export default Charts;

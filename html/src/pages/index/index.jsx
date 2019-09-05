@@ -9,11 +9,26 @@ import LiveStatus from '../../components/liveStatus/liveStatus.jsx';
 import ListViewer from '../../components/listViewer/listViewer.jsx';
 
 const IndexMain = (props) => {
+  const [values, setValues] = React.useState({
+    x: false,
+    ld: true,
+  });
+
+  if (!values.x) {
+    _x.utils.request('charts', null, (data) => {
+      try {
+        setValues({ ...JSON.parse(data), ld: false, x: true });
+      } catch (e) {
+        setValues({ ld: false, x: true });
+      }
+    });
+  }
+
   return pug`
     Search
     LiveStatus
     Hidden(smDown)
-      Charts
+      Charts(values=values)
     ListViewer
   `;
 };
