@@ -4,6 +4,10 @@ import { makeStyles, formatMs } from '@material-ui/core/styles';
 import InsertChartOutlinedIcon from '@material-ui/icons/InsertChartOutlined';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import Box from '@material-ui/core/Box';
+import RightIcon from '@material-ui/icons/KeyboardArrowRight';
+import LeftIcon from '@material-ui/icons/KeyboardArrowLeft';
+import Collapse from '@material-ui/core/Collapse';
 
 import echarts from 'echarts';
 import './world.js';
@@ -20,16 +24,77 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
     marginBottom: 0,
   },
+  ctl: {
+    width: 0,
+    flexGrow: 1,
+  },
+  ctlbox: {
+    color: '#666666',
+    fontSize: '0.7rem',
+    paddingBottom: '0.1rem',
+    paddingRight: '0.4rem',
+  },
+  iconRoot: {
+    color: '#666666',
+  },
+  action: {
+    cursor: 'pointer',
+  },
+  collapse: {
+    marginTop: '0.8rem',
+  },
 }));
 
 const ChartsMain = (props) => {
   const classes = useStyles();
+  const [checked, setChecked] = React.useState(false);
   const langMap = _x.config.langsMap[_x.utils.langs.get()];
+
+  function handleChange() {
+    setChecked(prev => !prev);
+  }
 
   return pug`
     Title(
       Icon='charts'
       Text=langMap[0xF001]
+      other=${pug`
+        Grid(
+          className=classes.ctl
+          container
+          direction='row'
+          justify='flex-end'
+          alignItems='center'
+        )
+          Grid(
+            item
+            alignItems='center'
+          )
+            Grid(
+              className=classes.action
+              container
+              direction='row'
+              justify='flex-end'
+              alignItems='center'
+              onClick=handleChange
+            )
+              if !checked
+                Box(className=classes.ctlbox)
+                  |view more
+                RightIcon(
+                  classes={
+                    root: classes.iconRoot,
+                  }
+                )
+              else
+                Box(className=classes.ctlbox)
+                  |hide
+                LeftIcon(
+                  classes={
+                    root: classes.iconRoot,
+                  }
+                )
+      `}
     )
     Paper(
       elevation=0
@@ -54,34 +119,44 @@ const ChartsMain = (props) => {
           )
             KovoBlock(className=classes.paperInner)
               #chart2.chart
+        Collapse(
+          in=checked
+          classes={
+            container: classes.collapse
+          }
+        )
           Grid(
-            item
-            md=6
-            xs=12
+            container
+            spacing=2
           )
-            KovoBlock(className=classes.paperInner)
-              #chart3.chart
-          Grid(
-            item
-            md=6
-            xs=12
-          )
-            KovoBlock(className=classes.paperInner)
-              #chart4.chart
-          Grid(
-            item
-            md=6
-            xs=12
-          )
-            KovoBlock(className=classes.paperInner)
-              #chart5.chart
-          Grid(
-            item
-            md=6
-            xs=12
-          )
-            KovoBlock(className=classes.paperInner)
-              #chart6.chart
+            Grid(
+              item
+              md=6
+              xs=12
+            )
+              KovoBlock(className=classes.paperInner)
+                #chart3.chart
+            Grid(
+              item
+              md=6
+              xs=12
+            )
+              KovoBlock(className=classes.paperInner)
+                #chart4.chart
+            Grid(
+              item
+              md=6
+              xs=12
+            )
+              KovoBlock(className=classes.paperInner)
+                #chart5.chart
+            Grid(
+              item
+              md=6
+              xs=12
+            )
+              KovoBlock(className=classes.paperInner)
+                #chart6.chart
   `;
 };
 
@@ -132,7 +207,7 @@ class Charts extends React.Component {
         top: '40',
         left: '20',
         right: '0',
-        bottom: '40',
+        bottom: '10',
         containLabel: true,
       },
       xAxis: {
@@ -147,11 +222,7 @@ class Charts extends React.Component {
           show: false,
         },
         axisTick: {
-          show: true,
-          length: 25,
-          lineStyle: {
-            color: 'rgba(209,209,209,0.5)',
-          },
+          show: false,
         },
         splitLine: {
           show: true,
@@ -168,11 +239,7 @@ class Charts extends React.Component {
           color: '#9e9e9e',
         },
         axisTick: {
-          show: true,
-          length: 15,
-          lineStyle: {
-            color: 'rgba(209,209,209,0.5)',
-          },
+          show: false,
         },
         splitLine: {
           show: true,
@@ -416,7 +483,7 @@ class Charts extends React.Component {
         top: '40',
         left: '20',
         right: '0',
-        bottom: '20',
+        bottom: '0',
         containLabel: true,
       },
       xAxis: {
@@ -431,11 +498,7 @@ class Charts extends React.Component {
           show: false,
         },
         axisTick: {
-          show: true,
-          length: 25,
-          lineStyle: {
-            color: 'rgba(209,209,209,0.5)',
-          },
+          show: false,
         },
         splitLine: {
           show: true,
@@ -452,11 +515,7 @@ class Charts extends React.Component {
           color: '#9e9e9e',
         },
         axisTick: {
-          show: true,
-          length: 15,
-          lineStyle: {
-            color: 'rgba(209,209,209,0.5)',
-          },
+          show: false,
         },
         splitLine: {
           show: true,
@@ -526,7 +585,7 @@ class Charts extends React.Component {
         top: '40',
         left: '20',
         right: '0',
-        bottom: '20',
+        bottom: '0',
         containLabel: true,
       },
       xAxis: {
@@ -541,11 +600,7 @@ class Charts extends React.Component {
           show: false,
         },
         axisTick: {
-          show: true,
-          length: 25,
-          lineStyle: {
-            color: 'rgba(209,209,209,0.5)',
-          },
+          show: false,
         },
         splitLine: {
           show: true,
@@ -562,11 +617,7 @@ class Charts extends React.Component {
           color: '#9e9e9e',
         },
         axisTick: {
-          show: true,
-          length: 15,
-          lineStyle: {
-            color: 'rgba(209,209,209,0.5)',
-          },
+          show: false,
         },
         splitLine: {
           show: true,
@@ -636,7 +687,7 @@ class Charts extends React.Component {
         top: '40',
         left: '20',
         right: '0',
-        bottom: '20',
+        bottom: '0',
         containLabel: true,
       },
       xAxis: {
@@ -651,11 +702,7 @@ class Charts extends React.Component {
           show: false,
         },
         axisTick: {
-          show: true,
-          length: 25,
-          lineStyle: {
-            color: 'rgba(209,209,209,0.5)',
-          },
+          show: false,
         },
         splitLine: {
           show: true,
@@ -672,11 +719,7 @@ class Charts extends React.Component {
           color: '#9e9e9e',
         },
         axisTick: {
-          show: true,
-          length: 15,
-          lineStyle: {
-            color: 'rgba(209,209,209,0.5)',
-          },
+          show: false,
         },
         splitLine: {
           show: true,
@@ -747,7 +790,7 @@ class Charts extends React.Component {
         top: '40',
         left: '20',
         right: '0',
-        bottom: '20',
+        bottom: '0',
         containLabel: true,
       },
       xAxis: {
@@ -762,11 +805,7 @@ class Charts extends React.Component {
           show: false,
         },
         axisTick: {
-          show: true,
-          length: 25,
-          lineStyle: {
-            color: 'rgba(209,209,209,0.5)',
-          },
+          show: false,
         },
         splitLine: {
           show: true,
@@ -783,11 +822,7 @@ class Charts extends React.Component {
           color: '#9e9e9e',
         },
         axisTick: {
-          show: true,
-          length: 15,
-          lineStyle: {
-            color: 'rgba(209,209,209,0.5)',
-          },
+          show: false,
         },
         splitLine: {
           show: true,

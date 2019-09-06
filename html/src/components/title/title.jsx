@@ -56,6 +56,7 @@ const Title = (props) => {
             className=classes.textInner
           )
             ${Text}
+      =props.other
   `;
 };
 

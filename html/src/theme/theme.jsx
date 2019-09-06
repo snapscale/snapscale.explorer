@@ -28,17 +28,19 @@ const theme = createMuiTheme({
         fontSize: '0.8rem',
         letterSpacing: '1px',
         lineHeight: 1.6,
-        fontWeight: 600,
+        fontWeight: 'normal',
         color: '#333333',
       },
       root: {
-        fontSize: '0.6rem',
-        fontWeight: 100,
         minWidth: 200,
         padding: '0.7rem 2rem 0.7rem 0.8rem',
         '&:first-child': {
           paddingLeft: 60,
         },
+      },
+      body: {
+        fontSize: '0.7rem',
+        fontWeight: 'bold',
       },
     },
     MuiTableRow: {
