@@ -9,18 +9,22 @@
 - material ui
 - echarts (Apache 2.0)
 
-## Plan
-- ### v1
-  Basic EOS Chain Explorer
-- ### v2
-  Basic EOS Chain Explorer  
-  Basic DAG Chain Explorer
-- ### v3
-  Customization Explorer
-
 ## Design Standard
 - unit base  
   1rem = 20px  
 
 - font-size  
   0.7rem+
+
+## Before Everything
+- Net
+    Snapscale-explorer | Snapscale-explorer-middleware should under same network group or provide 8089/8090 ports for explorer.
+    
+## Build && Run
+```bash
+./build
+```
+
+## Configuration
+- Nginx config  
+/nginx/nginx.conf

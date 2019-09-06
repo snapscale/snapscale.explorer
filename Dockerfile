@@ -3,6 +3,9 @@
 FROM node:10
 COPY html /html
 WORKDIR /html
+RUN rm -rf /html/node_modules
+RUN rm -rf /html/node_output
+RUN rm -rf /html/package-lock.json
 RUN npm install
 RUN npm update acorn --depth 20
 RUN npm dedupe
