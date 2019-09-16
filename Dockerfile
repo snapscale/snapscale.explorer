@@ -19,3 +19,10 @@ COPY --from=0 /html/output /html
 COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
+
+# Copy the EntryPoint
+COPY ./entryPoint.sh /
+RUN chmod +x entryPoint.sh
+
+ENTRYPOINT ["/entryPoint.sh"]
+CMD ["nginx", "-g", "daemon off;"]

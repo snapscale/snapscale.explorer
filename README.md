@@ -28,3 +28,17 @@
 ## Configuration
 - Nginx config  
 /nginx/nginx.conf
+
+## Docker build
+
+```
+docker build -t snapscale-explorer .
+```
+
+## Docker run
+
+Environment variables "API_URL" and "WS_URL" are required to run docker image
+
+```
+docker run -e API_URL='example.com:8888' -e WS_URL='example.com:8889' -p 80:80 snapscale-explorer
+```
