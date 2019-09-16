@@ -32,13 +32,13 @@
 ## Docker build
 
 ```
-docker build -t ss-explorer .
+docker build -t snapscale-explorer .
 ```
 
 ## Docker run
 
-Environment variables "PLACEHOLDER_API_URL" and "PLACEHOLDER_WS_URL" are required to run docker image
+Environment variables "API_URL" and "WS_URL" are required to run docker image
 
 ```
-docker run -e PLACEHOLDER_API_URL='example.com:8888' -e PLACEHOLDER_WS_URL='example.com:8889' -p 80:80 ss-explorer
+docker run -e API_URL='example.com:8888' -e WS_URL='example.com:8889' -p 80:80 snapscale-explorer
 ```
