@@ -32,7 +32,7 @@ const theme = createMuiTheme({
         color: '#333333',
       },
       root: {
-        minWidth: 200,
+        // minWidth: 200,
         padding: '0.7rem 2rem 0.7rem 0.8rem',
         '&:first-child': {
           paddingLeft: 60,

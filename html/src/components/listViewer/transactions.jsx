@@ -24,7 +24,7 @@ const useStyles1 = makeStyles(theme => ({
     border: 0,
   },
   tableSm: {
-    width: '5rem',
+    // width: '5rem',
   },
 }));
 
@@ -135,7 +135,7 @@ const Transactions = (props) => {
               |&nbsp;:&nbsp;
               =item.name
             TableCell
-              =new Date(item.time).toLocaleTimeString()
+              =new Date(item.time).toString().split(' ').slice(1,4).join('-') + " " + new Date(item.time).toString().split(' ')[4]
             TableCell
               a(href='/account/' + item.from)
                 =item.from

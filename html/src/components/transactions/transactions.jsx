@@ -155,7 +155,7 @@ const Transactions = (props) => {
                     href='/transaction/'+item.trx.id
                     className=classes.link
                   )
-                    =item.trx.id.substr(30)+'...'
+                    =item.trx.id.substr(0,30)+'...'
                 TableCell
                   =item.trx.transaction.actions.length
                 TableCell
