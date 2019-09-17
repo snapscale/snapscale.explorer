@@ -28,7 +28,7 @@ _x.config.langsMap.en = {
   0x2005: 'Voted Total',
   0x2006: 'Next Producer',
   0x2007: 'Staked Total',
-  0x2008: 'APS (Live / All Time High)',
+  0x2008: 'TPS (Live / All Time High)',
   0x2009: 'APS (Live / All Time High)',
   0x200A: 'CPU Limit (Block / Chain)',
   0x200B: 'NET Limit (Block / Chain)',

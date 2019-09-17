@@ -207,15 +207,15 @@ class Charts extends React.Component {
         top: '40',
         left: '20',
         right: '0',
-        bottom: '10',
+        bottom: '40',
         containLabel: true,
       },
       xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: ['', '', '', '', '', '', '', '', '', ''],
+        data: ['-9', '-8', '-7', '-6', '-5', '-4', '-3', '-2', '-1', '0'],
         axisLabel: {
-          margin: 30,
+          margin: 15,
           color: '#9e9e9e',
         },
         axisLine: {
@@ -483,15 +483,15 @@ class Charts extends React.Component {
         top: '40',
         left: '20',
         right: '0',
-        bottom: '0',
+        bottom: '20',
         containLabel: true,
       },
       xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: ['', '', '', '', '', '', '', '', '', ''],
+        data: ['-9', '-8', '-7', '-6', '-5', '-4', '-3', '-2', '-1', '0'],
         axisLabel: {
-          margin: 30,
+          margin: 15,
           color: '#9e9e9e',
         },
         axisLine: {
@@ -585,15 +585,15 @@ class Charts extends React.Component {
         top: '40',
         left: '20',
         right: '0',
-        bottom: '0',
+        bottom: '20',
         containLabel: true,
       },
       xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: ['', '', '', '', '', '', '', '', '', ''],
+        data: ['-9', '-8', '-7', '-6', '-5', '-4', '-3', '-2', '-1', '0'],
         axisLabel: {
-          margin: 30,
+          margin: 15,
           color: '#9e9e9e',
         },
         axisLine: {
@@ -687,13 +687,13 @@ class Charts extends React.Component {
         top: '40',
         left: '20',
         right: '0',
-        bottom: '0',
+        bottom: '20',
         containLabel: true,
       },
       xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: ['', '', '', '', '', '', '', '', '', ''],
+        data: ['-9', '-8', '-7', '-6', '-5', '-4', '-3', '-2', '-1', '0'],
         axisLabel: {
           margin: 30,
           color: '#9e9e9e',
@@ -790,15 +790,15 @@ class Charts extends React.Component {
         top: '40',
         left: '20',
         right: '0',
-        bottom: '0',
+        bottom: '20',
         containLabel: true,
       },
       xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: ['', '', '', '', '', '', '', '', '', ''],
+        data: ['-9', '-8', '-7', '-6', '-5', '-4', '-3', '-2', '-1', '0'],
         axisLabel: {
-          margin: 30,
+          margin: 15,
           color: '#9e9e9e',
         },
         axisLine: {

@@ -23,6 +23,10 @@ const useStyles1 = makeStyles(theme => ({
   pagination: {
     border: 0,
   },
+  small: {
+    color: '#999999',
+    paddingLeft: '1rem',
+  },
 }));
 
 function TablePaginationActions(props) {
@@ -132,9 +136,9 @@ const Producers = (props) => {
             TableCell
               =item.producing ? langMap[0x4105] : (item.is_active ? langMap[0x4106] : langMap[0x4107])
             TableCell
-              =parseInt((parseInt(item.total_votes) / 10000000000)).toLocaleString() + " Z"
-              |&nbsp;&nbsp;
-              =((parseInt(item.total_votes)/parseInt(item.total)) * 100).toFixed(2) + "%"
+              =parseInt((parseInt(item.total_votes) / 10000000000)).toLocaleString()
+              small(className=classes.small)
+                ="(" + ((parseInt(item.total_votes)/parseInt(item.total)) * 100).toFixed(2) + "%)"
       TableFooter
         TableRow
           TablePagination(
