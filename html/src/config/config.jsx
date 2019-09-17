@@ -54,7 +54,7 @@ _x.config.langsMap.en = {
   0x4107: 'Alternate',
   0x4200: 'Block Height',
   0x4201: 'Transaction Hash',
-  0x4202: 'Account & contract',
+  0x4202: 'Account & Contract',
   0x4203: 'Timestamp',
   0x4204: 'Info',
 
