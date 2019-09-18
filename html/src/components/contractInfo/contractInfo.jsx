@@ -70,6 +70,29 @@ const ContractInfo = (props) => {
 
   const langMap = _x.config.langsMap[_x.utils.langs.get()];
 
+  const arr = window.location.pathname.split('/');
+  const account = arr[arr.length - 1];
+
+  const [len, setLen] = React.useState(0);
+
+  _x.utils.request('actions', JSON.stringify({
+    account_name: account,
+    pos: -1,
+    offset: -1,
+  }), (data) => {
+    try {
+      const xdt = JSON.parse(data);
+
+      if (xdt.actions.length) {
+        if (xdt.actions[0].account_action_seq !== len) {
+          setLen(xdt.actions[0].account_action_seq);
+        }
+      }
+    } catch (e) {
+      console.log(data);
+    }
+  });
+
   return pug`
     Title(
       Icon='information'
@@ -125,7 +148,10 @@ const ContractInfo = (props) => {
           Loading
         else
           if value === 0
-            Actions(actions=props.values.abi.actions)
+            Actions(
+              actions=props.values.abi.actions
+              len=len
+            )
           if value === 1
             Tables(tables=props.values.abi.tables)
           if value === 2

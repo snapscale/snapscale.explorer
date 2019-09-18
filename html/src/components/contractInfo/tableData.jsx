@@ -35,7 +35,7 @@ const TablesData = (props) => {
     }), (data) => {
       try {
         const xdt = JSON.parse(data);
-        console.log(xdt);
+        // console.log(xdt);
 
         setTableData({
           keys: (xdt.rows.length === 0) ? [] : Object.keys(xdt.rows[0]),
