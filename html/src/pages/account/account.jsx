@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container';
 import Basic from '../../templates/basic/basic.jsx';
 
 import Search from '../../components/search/search.jsx';
+import Contract from '../../components/contract/contract.jsx';
 import AccountDetails from '../../components/accountDetails/accountDetails.jsx';
 import Actions from '../../components/actions/actions2.jsx';
 import Keys from '../../components/keys/keys.jsx';
@@ -31,6 +32,8 @@ const AccountMain = (props) => {
     if values.notfound
       NotFound(keyx='Account')
     else
+      if values.contract
+        Contract
       AccountDetails(values=values)
       Keys(values=values)
       Actions(values=values)

@@ -98,6 +98,13 @@ _x.config.langsMap.en = {
   0xA000: 'VIEW',
   0xA001: 'PERMISSIONS',
 
+  // contract info
+  0xB000: 'Actions',
+  0xB001: 'Tables',
+  0xB002: 'ABI',
+  0xB100: 'Choose A Table Name',
+  0xB101: 'Filter By Contract Interfaces',
+
   // titles
   0xF000: 'Live Status',
   0xF001: 'Charts',
@@ -108,6 +115,8 @@ _x.config.langsMap.en = {
   0xF006: 'Actions',
   0xF007: 'Account Details',
   0xF008: 'Permissions & Keys',
+  0xF009: 'Contract',
+  0xF00A: 'Contract Details',
 };
 
 _x.config.langsMap.tc = {
@@ -185,6 +194,12 @@ _x.config.langsMap.tc = {
   0xA000: '查看',
   0xA001: '權限',
 
+  0xB000: '事件',
+  0xB001: '表',
+  0xB002: 'ABI',
+  0xB100: '選擇壹張表',
+  0xB101: '按合約接口過濾',
+
   0xF000: '運行狀態',
   0xF001: '圖表',
   0xF002: '資訊',
@@ -194,6 +209,8 @@ _x.config.langsMap.tc = {
   0xF006: '事件清單',
   0xF007: '賬戶詳情',
   0xF008: '權限 & 公鑰',
+  0xF009: '合約',
+  0xF00A: '合約詳情',
 };
 
 _x.config.langsMap.sc = {
@@ -271,6 +288,12 @@ _x.config.langsMap.sc = {
   0xA000: '查看',
   0xA001: '权限',
 
+  0xB000: '事件',
+  0xB001: '表',
+  0xB002: 'ABI',
+  0xB100: '选择一张表',
+  0xB101: '按合约接口过滤',
+
   0xF000: '运行状态',
   0xF001: '图表',
   0xF002: '信息',
@@ -280,4 +303,6 @@ _x.config.langsMap.sc = {
   0xF006: '事件列表',
   0xF007: '账户详情',
   0xF008: '权限 & 公钥',
+  0xF009: '合约',
+  0xF00A: '合约详情',
 };

@@ -1,0 +1,31 @@
+{
+  "bp":[
+    {
+      "name": "shanghai",
+      "url": "http://www.shanghai-bp.io",
+      "longitude": "123.1234",
+      "latitude": "34.4312",
+      "location": "shanghai",
+      "country": "china",
+      "reward": "500"
+    },
+    {
+      "name": "chongqing",
+      "url": "http://www.chongqing-bp.io",
+      "longitude": "105.91",
+      "latitude": "29.38",
+      "location": "chongqing",
+      "country": "china",
+      "reward": "510"
+    },
+    {
+      "name": "beijing",
+      "url": "http://www.beijing-bp.io",
+      "longitude": "116.407394",
+      "latitude": "39.904202",
+      "location": "beijing",
+      "country": "china",
+      "reward": "520"
+    }
+  ]
+}
