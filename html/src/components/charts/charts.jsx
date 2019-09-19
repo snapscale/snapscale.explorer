@@ -456,18 +456,11 @@ class Charts extends React.Component {
     Chart2.setOption(option2);
 
     _x.utils.handles.dashboard.list.charts = (data) => {
-      // tps.push(data.performance.tps);
-      // aps.push(data.performance.aps * 2);
-      // tps = tps.slice(-10);
-      // aps = aps.slice(-10);
-      option.series[0].data = data.performance.tps_a.reverse();
-      option.series[1].data = data.performance.aps_a.reverse();
+      option.series[0].data = data.performance.tps_a;
+      option.series[1].data = data.performance.aps_a;
       Chart1.setOption(option);
 
       currentProducer = data.producers.current_producer;
-      // const id = Object.keys(chinaGeoCoordMap).lastIndexOf(currentProducer);
-      // otherProducer = Object.keys(chinaGeoCoordMap);
-      // otherProducer.splice(id, 1);
       option2.series[0].label.normal.formatter = chinaGeoCoordMap(currentProducer).name;
       option2.series[0].data = [{
         name: chinaGeoCoordMap(currentProducer).name,
