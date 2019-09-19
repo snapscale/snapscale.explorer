@@ -891,22 +891,22 @@ class Charts extends React.Component {
     _x.charts.update = (valuesx) => {
       Chart3.setOption({
         series: [{
-          data: valuesx.dt1,
+          data: valuesx.dt1.reverse(),
         }],
       });
       Chart4.setOption({
         series: [{
-          data: valuesx.dt2,
+          data: valuesx.dt2.reverse(),
         }],
       });
       Chart5.setOption({
         series: [{
-          data: valuesx.dt3,
+          data: valuesx.dt3.reverse(),
         }],
       });
       Chart6.setOption({
         series: [{
-          data: valuesx.dt4,
+          data: valuesx.dt4.reverse(),
         }],
       });
     };
