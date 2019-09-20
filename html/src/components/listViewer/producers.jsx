@@ -27,7 +27,12 @@ const useStyles1 = makeStyles(theme => ({
     color: '#999999',
     paddingLeft: '1rem',
   },
+  flag: {
+    width: '1.2rem',
+  },
 }));
+
+const BPINFO = require('../charts/bp.json');
 
 function TablePaginationActions(props) {
   const classes = useStyles1();
@@ -105,6 +110,11 @@ const Producers = (props) => {
     setRowsPerPage(parseInt(event.target.value, 10));
   }
 
+  const BPMAP = {};
+  BPINFO.bp.forEach((item) => {
+    BPMAP[item.name] = item;
+  });
+
   const langMap = _x.config.langsMap[_x.utils.langs.get()];
 
   return pug`
@@ -132,7 +142,10 @@ const Producers = (props) => {
               a(href='/account/' + item.owner)
                 =item.owner
             TableCell
-              =item.location
+              img(
+                className=classes.flag
+                src='/src/images/flags/' + BPMAP[item.owner].country + '.png'
+              )
             TableCell
               =item.producing ? langMap[0x4105] : (item.is_active ? langMap[0x4106] : langMap[0x4107])
             TableCell

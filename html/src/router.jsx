@@ -10,6 +10,7 @@ const Index = loadable(() => import('./pages/index/index.jsx'));
 const Account = loadable(() => import('./pages/account/account.jsx'));
 const Block = loadable(() => import('./pages/block/block.jsx'));
 const Search = loadable(() => import('./pages/search/search.jsx'));
+const Contract = loadable(() => import('./pages/contract/contract.jsx'));
 const Transaction = loadable(() => import('./pages/transaction/transaction.jsx'));
 const E404 = loadable(() => import('./pages/404/404.jsx'));
 
@@ -24,6 +25,7 @@ class AppRouter extends React.Component {
             Route(path='/block/:id', exact, component=Block)
             Route(path='/transaction/:id', exact, component=Transaction)
             Route(path='/search/:id', exact, component=Search)
+            Route(path='/contract/:id', exact, component=Contract)
             Route(component=E404)
     `;
   }

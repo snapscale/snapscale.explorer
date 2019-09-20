@@ -22,7 +22,13 @@ const useStyles = makeStyles(theme => ({
     borderRadius: '0.1rem !important',
   },
   detail: {
+    paddingLeft: '60px',
+    paddingRight: '60px',
     flexDirection: 'column',
+  },
+  eps: {
+    paddingLeft: '60px',
+    paddingRight: '60px',
   },
   key: {
     overflow: 'hidden',
@@ -42,7 +48,10 @@ const Keys = (props) => {
     )
     KovoBlock(className=classes.paper)
       ExpansionPanel(classes={root:classes.root})
-        ExpansionPanelSummary(expandIcon=${pug`ExpandMoreIcon`})
+        ExpansionPanelSummary(
+          classes={root:classes.eps}
+          expandIcon=${pug`ExpandMoreIcon`}
+        )
           if values.ld
             Loading
           else

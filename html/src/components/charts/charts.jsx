@@ -45,6 +45,8 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+const BPINFO = require('./bp.json');
+
 const ChartsMain = (props) => {
   const classes = useStyles();
   const [checked, setChecked] = React.useState(false);
@@ -162,12 +164,16 @@ const ChartsMain = (props) => {
 
 class Charts extends React.Component {
   componentDidMount() {
+    const BPMAP = {};
+    BPINFO.bp.forEach((item) => {
+      BPMAP[item.name] = item;
+    });
     const langMap = _x.config.langsMap[_x.utils.langs.get()];
 
     const Chart1 = echarts.init(document.getElementById('chart1'));
 
-    let tps = [];
-    let aps = [];
+    const tps = [];
+    const aps = [];
 
     const option = {
       backgroundColor: 'transparent',
@@ -323,23 +329,31 @@ class Charts extends React.Component {
 
     const Chart2 = echarts.init(document.getElementById('chart2'));
 
-    const chinaGeoCoordMap = {
-      beijing: {
-        name: '北京市',
-        value: [116.4551, 40.2539],
-      },
-      chongqing: {
-        name: '重庆',
-        value: [108.384366, 30.439702],
-      },
-      shanghai: {
-        name: '上海',
-        value: [121.4648, 31.2891],
-      },
+    // const chinaGeoCoordMap = {
+    //   beijing: {
+    //     name: '北京市',
+    //     value: [116.4551, 40.2539],
+    //   },
+    //   chongqing: {
+    //     name: '重庆',
+    //     value: [108.384366, 30.439702],
+    //   },
+    //   shanghai: {
+    //     name: '上海',
+    //     value: [121.4648, 31.2891],
+    //   },
+    // };
+
+    const chinaGeoCoordMap = (name) => {
+      const i = BPMAP[name];
+      return {
+        name: i.location,
+        value: [i.longitude, i.latitude],
+      };
     };
 
     let currentProducer = 'beijing';
-    let otherProducer = ['shanghai', 'chongqing'];
+    // let otherProducer = ['shanghai', 'chongqing'];
 
     const option2 = {
       backgroundColor: 'transparent',
@@ -405,7 +419,7 @@ class Charts extends React.Component {
             show: true,
             position: 'right', // 显示位置
             offset: [5, 0], // 偏移设置
-            formatter: chinaGeoCoordMap[currentProducer].name,
+            formatter: chinaGeoCoordMap(currentProducer).name,
             fontSize: 13,
           },
           emphasis: {
@@ -421,8 +435,8 @@ class Charts extends React.Component {
           },
         },
         data: [{
-          name: chinaGeoCoordMap[currentProducer].name,
-          value: chinaGeoCoordMap[currentProducer].value,
+          name: chinaGeoCoordMap(currentProducer).name,
+          value: chinaGeoCoordMap(currentProducer).value,
         }],
       },
       {
@@ -435,31 +449,24 @@ class Charts extends React.Component {
           },
         },
         zlevel: 1,
-        data: otherProducer.map(item => chinaGeoCoordMap[item]),
+        data: Object.keys(BPMAP).map(item => chinaGeoCoordMap(item)),
       }],
     };
 
     Chart2.setOption(option2);
 
     _x.utils.handles.dashboard.list.charts = (data) => {
-      tps.push(data.performance.tps);
-      aps.push(data.performance.aps * 2);
-      tps = tps.slice(-10);
-      aps = aps.slice(-10);
-      option.series[0].data = tps;
-      option.series[1].data = aps;
+      option.series[0].data = data.performance.tps_a;
+      option.series[1].data = data.performance.aps_a;
       Chart1.setOption(option);
 
       currentProducer = data.producers.current_producer;
-      const id = Object.keys(chinaGeoCoordMap).lastIndexOf(currentProducer);
-      otherProducer = Object.keys(chinaGeoCoordMap);
-      otherProducer.splice(id, 1);
-      option2.series[0].label.normal.formatter = chinaGeoCoordMap[currentProducer].name;
+      option2.series[0].label.normal.formatter = chinaGeoCoordMap(currentProducer).name;
       option2.series[0].data = [{
-        name: chinaGeoCoordMap[currentProducer].name,
-        value: chinaGeoCoordMap[currentProducer].value,
+        name: chinaGeoCoordMap(currentProducer).name,
+        value: chinaGeoCoordMap(currentProducer).value,
       }];
-      option2.series[1].data = otherProducer.map(item => chinaGeoCoordMap[item]);
+      option2.series[1].data = Object.keys(BPMAP).map(item => chinaGeoCoordMap(item));
       Chart2.setOption(option2);
     };
 
@@ -877,22 +884,22 @@ class Charts extends React.Component {
     _x.charts.update = (valuesx) => {
       Chart3.setOption({
         series: [{
-          data: valuesx.dt1,
+          data: valuesx.dt1 ? valuesx.dt1.reverse() : [],
         }],
       });
       Chart4.setOption({
         series: [{
-          data: valuesx.dt2,
+          data: valuesx.dt2 ? valuesx.dt2.reverse() : [],
         }],
       });
       Chart5.setOption({
         series: [{
-          data: valuesx.dt3,
+          data: valuesx.dt3 ? valuesx.dt3.reverse() : [],
         }],
       });
       Chart6.setOption({
         series: [{
-          data: valuesx.dt4,
+          data: valuesx.dt4 ? valuesx.dt4.reverse() : [],
         }],
       });
     };
