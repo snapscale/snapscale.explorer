@@ -48,7 +48,7 @@ _x.config.langsMap.en = {
   0x4101: 'Account',
   0x4102: 'Location',
   0x4103: 'Status',
-  0x4104: 'votes',
+  0x4104: 'Votes',
   0x4105: 'Producing',
   0x4106: 'Active',
   0x4107: 'Alternate',
