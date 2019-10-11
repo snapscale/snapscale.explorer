@@ -92,7 +92,7 @@ _x.config.langsMap.en = {
   0x9002: 'Total Balance',
   0x9003: 'RAM Usage',
   0x9004: 'CPU Usage',
-  0x9005: 'NET Usage',
+  0x9005: 'Net Usage',
 
   // keys
   0xA000: 'VIEW',
