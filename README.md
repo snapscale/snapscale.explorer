@@ -1,44 +1,35 @@
-# Snapscale-Explorer
+# SnapScale-explorer
 
-![](https://img.shields.io/badge/version-1.0.0-brightgreen) ![](https://img.shields.io/badge/author-Miguel-blue)
+SnapScal-explorer provide a interface to check snapscale status.
 
-## Stacks
-- webpack
-- react
-- sass
-- material ui
-- echarts (Apache 2.0)
+## Disclaimer
 
-## Design Standard
-- unit base  
-  1rem = 20px  
+SnapScal-explorer is neither launching nor operating any initial public blockchains based upon the SnapScale software. This release refers only to version 1.0 of our open source software. We caution those who wish to use blockchains built on SnapScale to carefully vet the companies and organizations launching blockchains based on SnapScale before disclosing any private keys to their derivative software.
 
-- font-size  
-  0.7rem+
+## Requirement
 
-## Before Everything
-- Net
-    Snapscale-explorer | Snapscale-explorer-middleware should under same network group or provide 8089/8090 ports for explorer.
-    
-## Build && Run
-```bash
-./build
+[<font color='red'>snapscale-explorer-middleware</font>](https://github.com/snapscale/snapscale.explorer.middleware/)
+
+## Building the source
+
+before build，you need to customize nginx config at nginx/nginx.conf. 
+
+```sh
+./build build
 ```
 
-## Configuration
-- Nginx config  
-/nginx/nginx.conf
+## Getting Started
 
-## Docker build
-
-```
-docker build -t snapscale-explorer .
-```
-
-## Docker run
-
-Environment variables "API_URL" and "WS_URL" are required to run docker image
-
-```
+```sh
 docker run -e API_URL='example.com:8888' -e WS_URL='example.com:8889' -p 80:80 snapscale-explorer
 ```
+
+## License
+
+SnapScal-explorer is released under the open source [MIT](./LICENSE) license and is offered “AS IS” without warranty of any kind, express or implied. Any security provided by the SnapScale software depends in part on how it is used, configured, and deployed. SnapScale is built upon many third-party libraries such as WABT (Apache License) and WAVM (BSD 3-clause) which are also provided “AS IS” without warranty of any kind. Without limiting the generality of the foregoing, Block.one makes no representation or guarantee that SnapScale or any third-party libraries will perform as intended or will be free of errors, bugs or faulty code. Both may fail in large or small ways that could completely or partially limit functionality or compromise computer systems. If you use or implement SnapScale, you do so at your own risk. In no event will Block.one be liable to any party for any damages whatsoever, even if it had been advised of the possibility of damage.  
+
+## Important
+
+See [LICENSE](./LICENSE) for copyright and license terms.
+
+All repositories and other materials are provided subject to the terms of this [IMPORTANT](./IMPORTANT.md) notice and you must familiarize yourself with its terms.  The notice contains important information, limitations and restrictions relating to our software, publications, trademarks, third-party resources, and forward-looking statements.  By accessing any of our repositories and other materials, you accept and agree to the terms of the notice.
