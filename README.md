@@ -1,10 +1,10 @@
-# SnapScale-explorer
+# SnapScale Explorer
 
-SnapScal-explorer provide a interface to check snapscale status.
+SnapScale Explorer provides an interface to monitor SnapScale status and activity.
 
 ## Disclaimer
 
-SnapScal-explorer is neither launching nor operating any initial public blockchains based upon the SnapScale software. This release refers only to version 1.0 of our open source software. We caution those who wish to use blockchains built on SnapScale to carefully vet the companies and organizations launching blockchains based on SnapScale before disclosing any private keys to their derivative software.
+This release refers only to version 1.0 of our open source software. We caution those who wish to use SnapScale forks to carefully vet the companies and organizations launching blockchains based on SnapScale before disclosing any private keys to their derivative software.
 
 ## Requirement
 
@@ -12,7 +12,7 @@ SnapScal-explorer is neither launching nor operating any initial public blockcha
 
 ## Building the source
 
-before build，you need to customize nginx config at nginx/nginx.conf. 
+In order to build the source, customize nginx config at nginx/nginx.conf.
 
 ```sh
 ./build build
@@ -26,7 +26,7 @@ docker run -e API_URL='example.com:8888' -e WS_URL='example.com:8889' -p 80:80 s
 
 ## License
 
-SnapScal-explorer is released under the open source [MIT](./LICENSE) license and is offered “AS IS” without warranty of any kind, express or implied. Any security provided by the SnapScale software depends in part on how it is used, configured, and deployed. SnapScale is built upon many third-party libraries such as WABT (Apache License) and WAVM (BSD 3-clause) which are also provided “AS IS” without warranty of any kind. Without limiting the generality of the foregoing, Block.one makes no representation or guarantee that SnapScale or any third-party libraries will perform as intended or will be free of errors, bugs or faulty code. Both may fail in large or small ways that could completely or partially limit functionality or compromise computer systems. If you use or implement SnapScale, you do so at your own risk. In no event will Block.one be liable to any party for any damages whatsoever, even if it had been advised of the possibility of damage.  
+SnapScale Explorer is released under the Apache 2.0 license and is offered “AS IS” without warranty of any kind, express or implied. Any security provided by the SnapScale software depends in part on how it is used, configured, and deployed. SnapScale is built upon many third-party libraries such as WABT (Apache License) and WAVM (BSD 3-clause) which are also provided “AS IS” without warranty of any kind. 
 
 ## Important
 
